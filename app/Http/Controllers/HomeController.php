@@ -24,9 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $badge = \App\User::find(2)->badge->first();
-        $user = User::find(2);
-        echo $user->name .' has badges: ' . $badge->title;
+        $badge = \App\User::find(1)->badge;
+        $user = User::find(1);
+        echo $user->name .' has badges: ';
+        foreach($badge as $item) {
+            echo '<br> Title: '.$item->title;
+        }
         return view('home');
     }
 }

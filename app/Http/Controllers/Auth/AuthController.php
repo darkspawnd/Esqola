@@ -48,6 +48,10 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'required' => ':Attribute es requerido'
+        ];
+
         return Validator::make($data, [
             'name' => 'required|max:255',
             'lastname' => 'required|max:255',
@@ -57,7 +61,7 @@ class AuthController extends Controller
             'age' => 'digits:2',
             'firstaccess' => 'digits:1',
             'password' => 'required|min:6|confirmed',
-        ]);
+        ],$messages);
     }
 
     /**
