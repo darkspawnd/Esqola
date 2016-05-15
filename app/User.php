@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     /**
      * The attributes that are mass assignable.
      *
@@ -35,6 +37,10 @@ class User extends Authenticatable
     public function badge() {
         //return $this->hasMany('App\Saved_badges');
         return $this->belongsToMany('App\Badges','saved_badges');
+    }
+
+    public function full_name() {
+        return $this->name . ' ' . $this->lastname;
     }
 
 }

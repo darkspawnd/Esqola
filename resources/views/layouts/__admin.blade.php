@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {!! Html::script('scripts/jquery.js') !!}
+
+    {!! Html::style('semantic-ui/dist/semantic.min.css') !!}
+    {!! Html::script('semantic-ui/dist/semantic.min.js') !!}
+
+    {!! Html::style('css/custom.css') !!}
+    {!! Html::script('scripts/app.js') !!}
+
+    <title>Esqola | Administration</title>
+
+</head>
+<body id="app-layout">
+
+<div class="top-menu">
+    <div class="ui attached large borderless menu icon labeled">
+        <div class="right menu labeled icon">
+            <a class="item" href="">
+                <i class="icon user"></i>
+                {{ $user->full_name() }}
+            </a>
+            <a class="item">
+                <i class="icon settings"></i>
+            </a>
+            <a class="item orange active">
+                <i class="icon lightning"></i> 0
+            </a>
+        </div>
+    </div>
+</div>
+<div class="ui">
+    <div class="left-menu">
+        <div class="ui attached vertical menu icon labeled left">
+            <a class="ui item orange dashboard-home" href="{!! action('adminController@dashboard') !!}">
+                <i class="icon dashboard"></i>
+                Dashboard
+            </a>
+            <a class="ui item orange users-home" href="{!! action('adminController@mainUsers') !!}">
+                <i class="icon user"></i>
+                Usuarios
+            </a>
+            <a class="ui item orange">
+                <i class="icon book"></i>
+                Notas
+            </a>
+            <a class="ui item orange">
+                <i class="icon file"></i>
+                Tareas
+            </a>
+            <a class="ui item orange">
+                <i class="icon content"></i>
+                Contenidos
+            </a>
+            <a class="ui item orange">
+                <i class="icon calendar"></i>
+                Eventos
+            </a>
+            <a class="ui item orange">
+                <i class="icon setting"></i>
+                Ajustes
+            </a>
+            <a class="ui item orange" href="{!! url('/logout') !!}">
+                <i class="icon moon"></i>
+                Cerrar Sesión
+            </a>
+        </div>
+    </div>
+    <div class="main-content">
+        @yield('content')
+    </div>
+</div>
+
+</body>
+</html>

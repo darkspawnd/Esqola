@@ -1,4 +1,4 @@
-<div class="ui segments">
+<div class="ui attached segments">
     <div class="ui segment center aligned"> <div class="ui header">Inicio de Sesión</div> </div>
     <div class="ui segment">
         <form class="ui form error" role="form" method="POST" action="{{ url('/login') }}">
@@ -25,9 +25,6 @@
                     <label>Recordarme</label>
                 </div>
             </div>
-            <div class="field">
-                <a class="btn btn-link" href="{{ url('/password/reset') }}">Olvidé mi contraseña</a>
-            </div>
             <div class="field align-to-right">
                     <button type="submit" class="ui basic   animated button">
                         <div class="visible content">Iniciar Sesión</div>
@@ -39,4 +36,9 @@
 
         </form>
     </div>
+    <div class="ui bottom attached warning message">
+        <i class="icon help"></i>
+        <a class="btn btn-link" href="{{ url('/password/reset') }}">Olvidé mi contraseña</a>
+    </div>
 </div>
+

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\User as User;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -24,12 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $badge = \App\User::find(1)->badge;
-        $user = User::find(1);
-        echo $user->name .' has badges: ';
-        foreach($badge as $item) {
-            echo '<br> Title: '.$item->title;
-        }
-        return view('home');
+        $user = Auth::user();
+        if($user->hasRole('admin'))
+            return redirect()->action('adminController@dashboard');
+        if($user->hasRole('teacher'))
+            return redirect()->action('teacherController@dashboard');
+        if($user->hasRole('student'))
+            return redirect()->action('student@dashboard');
     }
 }

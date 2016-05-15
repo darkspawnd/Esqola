@@ -11,5 +11,27 @@
 |
 */
 
+/*
+ * PUBLIC APP
+ */
+
 Route::auth();
 Route::get('/', 'HomeController@index');
+
+
+/*
+ * ADMINISTRATION
+ */
+Route::get('/admin', 'adminController@dashboard');
+
+/*
+ * REMOVE USER
+ */
+Route::get('/admin/users','adminController@mainUsers');
+Route::get('/admin/users/add','adminController@addUser');
+
+// SAVING USERS
+Route::post('/admin/users/add', 'adminController@createUser');
+
+//DELETING USERS
+Route::get('/admin/users/remove/{email}', ['uses'=>'adminController@removeUser']);
