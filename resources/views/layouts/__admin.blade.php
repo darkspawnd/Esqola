@@ -42,7 +42,7 @@
             </a>
             <a class="ui item orange users-home" href="{!! action('adminController@mainUsers') !!}">
                 <i class="icon user"></i>
-                Usuarios
+                General
             </a>
             <a class="ui item orange">
                 <i class="icon book"></i>
