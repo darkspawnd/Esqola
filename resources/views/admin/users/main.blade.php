@@ -5,7 +5,7 @@
             <div class="ui header item borderless">
                 Usuarios
             </div>
-            <a class="ui icon labeled item right aligned primary" href="{!! action('adminController@addUser') !!}">
+            <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\UsersController@addUser') !!}">
                 <i class="icon add"></i>
                 Agregar
             </a>
@@ -27,10 +27,10 @@
                             <td> {!! $current_user->email !!} </td>
                             <td> {!! $current_user->roles()->pluck('name') !!} </td>
                             <td>
-                                <a href="{!! action('adminController@removeUser',['email'=>$current_user->email]) !!}" class=" yesnomodallink">
+                                <a href="{!! action('Admin\UsersController@removeUser',['email'=>$current_user->email]) !!}" class=" yesnomodallink">
                                     <i class="icon delete compact"></i>
                                 </a>
-                                <a href="{!! action('adminController@removeUser',['email'=>$current_user->email]) !!}" class=" yesnomodallink">
+                                <a href="{!! action('Admin\UsersController@removeUser',['email'=>$current_user->email]) !!}" class=" yesnomodallink">
                                     <i class="icon delete compact"></i>
                                 </a>
                             </td>

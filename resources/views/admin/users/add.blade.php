@@ -19,7 +19,7 @@
                     <li>{{ $status->message }}</li>
                 </div>
             @endif
-            <form method="post" class="ui form error" role="form" action="{!! action('adminController@createUser') !!}">
+            <form method="post" class="ui form error" role="form" action="{!! action('Admin\UsersController@createUser') !!}">
                 {!! csrf_field() !!}
                 <div class="two fields">
                     <div class="required field">

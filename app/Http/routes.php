@@ -23,11 +23,14 @@ Route::get('/', 'HomeController@index');
 Route::get('/admin', 'adminController@dashboard');
 
 //REMOVE USER
-Route::get('/admin/users','adminController@mainUsers');
-Route::get('/admin/users/add','adminController@addUser');
+Route::get('/admin/users','Admin\UsersController@mainUsers');
+Route::get('/admin/users/add','Admin\UsersController@addUser');
 
 // SAVING USERS
-Route::post('/admin/users/add', 'adminController@createUser');
+Route::post('/admin/users/add', 'Admin\UsersController@createUser');
 
 //DELETING USERS
-Route::get('/admin/users/remove/{email}', ['uses'=>'adminController@removeUser']);
+Route::get('/admin/users/remove/{email}', ['uses'=>'Admin\UsersController@removeUser']);
+
+
+Route::get('/test','Admin\NotasController@index');

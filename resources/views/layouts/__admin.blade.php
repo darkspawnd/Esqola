@@ -40,9 +40,9 @@
                 <i class="icon dashboard"></i>
                 Dashboard
             </a>
-            <a class="ui item orange users-home" href="{!! action('adminController@mainUsers') !!}">
+            <a class="ui item orange users-home" href="{!! action('Admin\UsersController@mainUsers') !!}">
                 <i class="icon user"></i>
-                Usuarios
+                General
             </a>
             <a class="ui item orange">
                 <i class="icon book"></i>
