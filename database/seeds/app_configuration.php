@@ -25,6 +25,7 @@ class app_configuration extends Seeder
             'firstaccess' => 0,
             'lastname' => 'Admin',
             'telephone' => '00000000',
+            'uuid' => Uuid::generate(),
             'password' => Hash::make('esqolaadmin'),
         ]);
 

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission as Permission;
 use Spatie\Permission\Models\Role as Roles;
 use Validation;
+use Webpatser\Uuid\Uuid as UUID;
 
 class UsersController extends Controller
 {
@@ -74,8 +75,9 @@ class UsersController extends Controller
                     'email' => $data['Email'],
                     'address' => $data['address'],
                     'age' => $data['Edad'],
+                    'uuid' => UUID::generate(4),
                     'password' => bcrypt($data['Contraseña']),
-                    'firstaccess' => 1
+                    'firstaccess' => 1,
                 ]);
 
                 $saved_user->assignRole($data['role']);
@@ -106,12 +108,13 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function removeUser($email) {
+    public function removeUser($uuid) {
+        $requested_user = Auth::user();
         try{
-            $user = User::where('email','=',$email)->delete();
+            $user = User::where('uuid','=',$uuid)->delete();
         }Catch(\Exception $e){
             Error::create([
-                'user_id' => $user->id,
+                'user_id' => $requested_user->id,
                 'error' => 'Failed to create user',
                 'description' => $e,
                 'type' => 2,

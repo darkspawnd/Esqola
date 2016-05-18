@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('age')->nullable();
             $table->string('password');
             $table->string('firstaccess')->nullable();
+            $table->string('uuid')->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps();
         });

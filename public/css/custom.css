@@ -8,10 +8,10 @@
 
 body {
     position: relative;
-    overflow: hidden;
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,.05);
+    overflow: hidden;
 }
 
 .app-main-login {
@@ -20,6 +20,10 @@ body {
     top: 50%;
     transform: translate(0,-50%);
     max-width: 500px;
+}
+
+.scrollablecontent {
+    overflow: scroll;
 }
 
 .login-page {
@@ -47,4 +51,7 @@ body {
     vertical-align: top;
     padding: 50px;
     margin-left: -5px;
+    overflow: visible;
+    height: auto;
+    background: red;
 }

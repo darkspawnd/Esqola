@@ -12,7 +12,7 @@
             @endif
             <div class="required field">
                 <label> Email </label>
-                <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                <input type="text" class="email" name="email" value="{{ old('email') }}" placeholder="Email">
             </div>
 
             <div class="required field">
@@ -42,3 +42,6 @@
     </div>
 </div>
 
+<script type="application/javascript">
+    $('input.email').focus();
+</script>

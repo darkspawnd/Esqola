@@ -27,7 +27,7 @@
                             <td> {!! $current_user->email !!} </td>
                             <td> {!! $current_user->roles()->pluck('name') !!} </td>
                             <td>
-                                <a href="{!! action('Admin\UsersController@removeUser',['email'=>$current_user->email]) !!}" class=" yesnomodallink">
+                                <a href="{!! action('Admin\UsersController@removeUser',['uuid'=>$current_user->uuid]) !!}" class=" yesnomodallink">
                                     <i class="icon delete compact"></i>
                                 </a>
                                 <a href="{!! action('Admin\UsersController@removeUser',['email'=>$current_user->email]) !!}" class=" yesnomodallink">
