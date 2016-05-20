@@ -1,15 +1,22 @@
 $(function () {
 
-    $('.ui.button').click(function () {$(this).addClass('loading')});
+    $('.ui.button.submit').click(function () {$(this).addClass('loading')});
 
-    $('.yesnomodallink').click(function(e) {
-        e.preventDefault();
-        $redirection = $(this).attr('href');
-        $('.ui.modal').modal('setting', {
-            closable: false,
-            onApprove: function () {
-                window.location = $redirection;
+    $('.ui.table').DataTable({
+        "language": {
+            'lengthMenu': 'Mostrar _MENU_  de resultados por página',
+            "zeroRecords": "No hay resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay resultados disponibles",
+            "infoFiltered": "(Filtrados de _MAX_ datos en total)",
+            "search": "Búscar: ",
+            "paginate": {
+                "previous": "<",
+                "next": ">"
             }
-        }).modal('show');
+        }
     });
+
+    $('.ui.dropdown.normal').dropdown();
+
 });

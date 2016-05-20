@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="field align-to-right">
-                    <button type="submit" class="ui basic   animated button">
+                    <button type="submit" class="ui basic submit animated button">
                         <div class="visible content">Iniciar Sesión</div>
                         <div class="hidden content">
                             <i class="right arrow icon"></i>

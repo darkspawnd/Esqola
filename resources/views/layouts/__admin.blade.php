@@ -11,6 +11,8 @@
 
     {!! Html::style('css/custom.css') !!}
     {!! Html::script('scripts/app.js') !!}
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js" type="application/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.semanticui.min.js" type="application/javascript"></script>
 
     <title>Esqola | Administration</title>
 
@@ -71,6 +73,7 @@
         </div>
     </div>
     <div class="main-content">
+        {!! Breadcrumbs::render() !!}
         @yield('content')
     </div>
 </div>
