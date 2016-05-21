@@ -1,5 +1,8 @@
 $(function () {
 
+    NProgress.start();
+    NProgress.done();
+
     $('.ui.button.submit').click(function () {$(this).addClass('loading')});
 
     $('.ui.table').DataTable({

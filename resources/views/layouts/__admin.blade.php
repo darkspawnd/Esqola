@@ -9,8 +9,12 @@
     {!! Html::style('semantic-ui/dist/semantic.min.css') !!}
     {!! Html::script('semantic-ui/dist/semantic.min.js') !!}
 
+    {!! Html::style('css/nprogress.css') !!}
+    {!! Html::script('scripts/nprogress.js') !!}
+
     {!! Html::style('css/custom.css') !!}
     {!! Html::script('scripts/app.js') !!}
+
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js" type="application/javascript"></script>
     <script src="https://cdn.datatables.net/1.10.11/js/dataTables.semanticui.min.js" type="application/javascript"></script>
 

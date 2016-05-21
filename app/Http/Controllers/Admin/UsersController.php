@@ -27,7 +27,6 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function mainUsers() {
-
         $user = Auth::user();
         $usersList = User::all();
 
