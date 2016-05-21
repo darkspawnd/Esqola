@@ -26,3 +26,13 @@ Breadcrumbs::register('Editar', function($breadcrumbs) {
     $breadcrumbs->parent('Usuarios');
     $breadcrumbs->push('Editar', action('Admin\UsersController@addUser'));
 });
+
+Breadcrumbs::register('Grados', function($breadcrumbs) {
+    $breadcrumbs->parent('Administración');
+    $breadcrumbs->push('Grados', action('Admin\GradesController@index'));
+});
+
+Breadcrumbs::register('Agregar', function($breadcrumbs) {
+    $breadcrumbs->parent('Grados');
+    $breadcrumbs->push('Agregar', action('Admin\GradesController@addGrade'));
+});

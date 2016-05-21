@@ -3,7 +3,7 @@
         @foreach ($breadcrumbs as $breadcrumb)
             @if ($breadcrumb->url && !$breadcrumb->last)
                 <a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a>
-                <span class="divider">/</span>
+                <i class="right angle icon divider"></i>
             @else
                 <div class="active section">{{ $breadcrumb->title }}</div>
             @endif

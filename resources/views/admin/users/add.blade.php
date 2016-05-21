@@ -1,5 +1,15 @@
 @extends('layouts/__admin')
 @section('content')
+    <div class="ui text menu">
+        <a class="item" href="{!! action('Admin\GradesController@index') !!}">
+            <button class="ui button basic active"><i class="icon angle left ui"></i> Regresar</button>
+        </a>
+        <div class="right menu">
+            <div class="item">
+                <h5 class="ui header"> {!! Breadcrumbs::renderIfExists() !!}</h5>
+            </div>
+        </div>
+    </div>
     <div class="ui segments">
         <div class="ui menu attached right icon labeled aligned">
             <div class="ui header item borderless">
@@ -69,7 +79,7 @@
                     </select>
                 </div>
                 <div class="field align-to-right">
-                    <button class="ui basic submit button">
+                    <button class="ui orange submit button">
                         <i class="icon add"></i>Añadir
                     </button>
                 </div>

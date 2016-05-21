@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\errors as Error;
-use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\User as User;
 use Auth;
@@ -13,11 +12,12 @@ use Spatie\Permission\Models\Role as Roles;
 use Validation;
 use Webpatser\Uuid\Uuid as UUID;
 
-class UsersController extends Controller
+class UsersController extends AdminBaseController
 {
 
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth');
     }
 
@@ -26,6 +26,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function mainUsers() {
         $user = Auth::user();
         $usersList = User::all();
@@ -33,19 +34,20 @@ class UsersController extends Controller
         $roles = Roles::where('name','!=','admin')->get();
         $permissions = Permission::all();
 
-        return view('admin.users.main', ['user'=>$user, 'users'=>$usersList, 'roles'=>$roles]);
+        return view('admin.users.main', ['users'=>$usersList, 'roles'=>$roles]);
     }
 
     public function addUser() {
-        $user = Auth::user();
-        return view('admin.users.add', ['user' => $user]);
+        return view('admin.users.add');
     }
+
 
     /**
      * User Validation and Creation
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function createUser(Request $data) {
         $user = Auth::user();
         $message = [
@@ -99,14 +101,16 @@ class UsersController extends Controller
             );
         }
 
-        return view('admin.users.add', ['user' => $user, 'status' => $status]);
+        return view('admin.users.add', ['status' => $status]);
     }
+
 
     /**
      * Delete User From Database
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function removeUser($uuid) {
         $requested_user = Auth::user();
         try{
@@ -123,6 +127,11 @@ class UsersController extends Controller
         return redirect()->action('Admin\UsersController@mainUsers');
     }
 
+    /**
+     * @param $uuid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+
     public function editUser($uuid) {
         $requested_user = Auth::user();
         if(User::where('uuid','=',$uuid)->exists()) {
@@ -138,6 +147,12 @@ class UsersController extends Controller
             return View('admin.users.main',['user'=>$requested_user]);
         }
     }
+
+
+    /**
+     * @param Request $data
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
 
     public function updateUser(Request $data) {
         $user = Auth::user();
@@ -176,7 +191,7 @@ class UsersController extends Controller
                     'message' => 'Usuario actualizado satisfactoriamente.',
                 );
 
-                return view('admin.users.update', ['user' => $user, 'status' => $status, 'update_user'=>$to_edit]);
+                return view('admin.users.update', ['status' => $status, 'update_user'=>$to_edit]);
             }
         } catch(\Exception $e) {
             Error::create([
@@ -191,6 +206,6 @@ class UsersController extends Controller
             );
         }
 
-        return view('admin.users.update', ['user' => $user, 'status' => $status]);
+        return view('admin.users.update', ['status' => $status]);
     }
 }

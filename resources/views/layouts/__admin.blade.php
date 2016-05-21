@@ -77,7 +77,6 @@
         </div>
     </div>
     <div class="main-content">
-        {!! Breadcrumbs::render() !!}
         @yield('content')
     </div>
 </div>

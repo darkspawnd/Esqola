@@ -1,6 +1,22 @@
 @extends('layouts/__admin')
 @section('content')
-    <div class="ui segments">
+    <div class="ui secondary pointing menu">
+        <a class="active item">
+            Usuarios
+        </a>
+        <a class="item" href="{!! action('Admin\GradesController@index') !!}">
+            Grados
+        </a>
+        <a class="item">
+            Materias
+        </a>
+        <div class="right menu">
+            <div class="item">
+                <h5 class="ui header"> {!! Breadcrumbs::renderIfExists() !!}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="ui segments ">
         <div class="ui menu attached right icon labeled aligned">
             <div class="ui header item borderless">
                 Usuarios
@@ -76,7 +92,6 @@
             </table>
         </div>
     </div>
-
 
     <div class="ui modal small">
         <div class="header">¿Desea continuar?</div>

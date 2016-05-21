@@ -39,6 +39,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Badges','saved_badges');
     }
 
+    public function grade() {
+        return $this->belongsToMany('App\Grades','grades');
+    }
+
     public function full_name() {
         return $this->name . ' ' . $this->lastname;
     }
