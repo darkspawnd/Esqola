@@ -34,9 +34,9 @@
                 <th class="collapsing">Acciones</th>
                 </thead>
                 <tbody>
-                @foreach($grades as $current_grade)
+                @foreach($grades as $key => $current_grade)
                     <tr>
-                        <td> {{{ $current_grade->id }}} </td>
+                        <td> {{{ $key+1 }}} </td>
                         <td> {{{ $current_grade->name }}} </td>
                         <td>
                             <div class="ui floating labeled icon dropdown button">
@@ -48,10 +48,10 @@
                                         Opciones
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="item" data-value="{!! action('Admin\UsersController@editUser',['uuid'=>$current_grade]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\GradesController@remove',['uuid'=>$current_grade->uuid]) !!}">
                                         Editar
                                     </div>
-                                    <div class="item" data-value="{!! action('Admin\UsersController@removeUser',['uuid'=>$current_grade]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\GradesController@remove',['uuid'=>$current_grade->uuid]) !!}">
                                         Eliminar
                                     </div>
                                 </div>

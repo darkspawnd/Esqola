@@ -21,19 +21,21 @@ class AppSetup extends Migration
             $table->integer('grade_id')->unsigned()->nullable();
             $table->string('incharge');
             $table->string('incharge_info');
-            $table->uuid('identifier');
+            $table->string('avatar');
             $table->timestamps();
         });
 
         Schema::create('grades', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name',500);
+            $table->string('uuid')->nullable();
             $table->timestamps();
         });
 
         Schema::create('courses', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name',300);
+            $table->string('uuid')->nullable();
             $table->timestamps();
         });
 

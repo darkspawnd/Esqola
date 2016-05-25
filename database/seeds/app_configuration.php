@@ -34,11 +34,11 @@ class app_configuration extends Seeder
         ]);
 
         Role::create([
-            'name' => 'student'
+            'name' => 'Estudiante'
         ]);
 
         Role::create([
-            'name' => 'teacher'
+            'name' => 'Maestro'
         ]);
 
         Permission::create([

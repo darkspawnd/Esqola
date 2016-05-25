@@ -4,6 +4,11 @@
     text-align: right;
 }
 
+.small-form {
+    max-width: 1000px;
+    margin: auto !important;
+}
+
 /* UI FOR ESQOLA DESKTOP */
 
 body {

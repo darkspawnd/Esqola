@@ -1,7 +1,7 @@
 @extends('layouts/__admin')
 @section('content')
     <div class="ui text menu">
-        <a class="item" href="{!! action('Admin\GradesController@index') !!}">
+        <a class="item" href="{!! action('Admin\UsersController@mainUsers') !!}">
             <button class="ui button basic active"><i class="icon angle left ui"></i> Regresar</button>
         </a>
         <div class="right menu">
@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="ui segments">
+    <div class="ui segments small-form">
         <div class="ui menu attached right icon labeled aligned">
             <div class="ui header item borderless">
                Agregar Usuario
@@ -31,7 +31,10 @@
             @endif
             <form method="post" class="ui form error" role="form" action="{!! action('Admin\UsersController@createUser') !!}">
                 {!! csrf_field() !!}
-                <div class="two fields">
+                <h4 class="ui horizontal header divider">
+                    General
+                </h4>
+
                     <div class="required field">
                         <label class="ui"> Nombre </label>
                         <input type="text" name="Nombre" value="{{ old('Nombre') }}">
@@ -40,8 +43,7 @@
                         <label class="ui"> Apellido </label>
                         <input type="text" name="Apellido" value="{{ old('Apellido') }}">
                     </div>
-                </div>
-                <div class="two fields">
+
                     <div class="required field">
                         <label class="ui"> Email </label>
                         <input type="text" name="Email" value="{{ old('Email') }}">
@@ -50,8 +52,7 @@
                         <label class="ui"> Teléfono </label>
                         <input type="number" name="Telefono" value="{{ old('Telefono') }}">
                     </div>
-                </div>
-                <div class="two fields">
+
                     <div class="field">
                         <label class="ui"> Dirección </label>
                         <input type="text" name="address" value="{{ old('address') }}">
@@ -60,8 +61,7 @@
                         <label class="ui"> Edad </label>
                         <input type="number" name="Edad" value="{{ old('Edad') }}">
                     </div>
-                </div>
-                <div class="two fields">
+
                     <div class="required field">
                         <label class="ui"> Contraseña (6 caracteres mínimo) </label>
                         <input type="password" name="Contraseña">
@@ -70,13 +70,23 @@
                         <label class="ui"> Confirmar Contraseña </label>
                         <input type="password" name="Contraseña_confirmation">
                     </div>
-                </div>
+
                 <div class="field">
                     <label>Rol</label>
                     <select class="ui dropdown normal" name="role">
-                        <option class="ui" value="student">Estudiante</option>
-                        <option class="ui" value="teacher">Maestro</option>
+                        @foreach($roles as $role)
+                            <option class="ui" value="{{{$role->name}}}">{{{$role->name}}}</option>
+                        @endforeach
                     </select>
+                </div>
+                <h4 class="ui horizontal header divider">Información </h4>
+                <div class="field">
+                    <label class="ui"> Encargado </label>
+                    <input type="text" name="encargado">
+                </div>
+                <div class="field">
+                    <label class="ui" name="infoEncargado"> Información encargado </label>
+                    <textarea rows="2"></textarea>
                 </div>
                 <div class="field align-to-right">
                     <button class="ui orange submit button">

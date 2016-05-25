@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\errors as Error;
+use App\Grades as Grade;
 use App\Http\Requests;
 use App\User as User;
 use Auth;
@@ -34,11 +35,17 @@ class UsersController extends AdminBaseController
         $roles = Roles::where('name','!=','admin')->get();
         $permissions = Permission::all();
 
+        $user_at = User::find(2)->attribute->remove();
+        var_dump($user_at);
+        exit();
+
         return view('admin.users.main', ['users'=>$usersList, 'roles'=>$roles]);
     }
 
     public function addUser() {
-        return view('admin.users.add');
+        $roles = Roles::where('name','!=','admin')->get();
+        $grades = Grade::all();
+        return view('admin.users.add',['roles'=>$roles, 'grades'=>$grades]);
     }
 
 
@@ -100,8 +107,9 @@ class UsersController extends AdminBaseController
                 'message' => 'Error creando usuario intente de nuevo.',
             );
         }
-
-        return view('admin.users.add', ['status' => $status]);
+        $roles = Roles::where('name','!=','admin')->get();
+        $grades = Grade::all();
+        return view('admin.users.add', ['status' => $status, 'roles'=>$roles, 'grades'=>$grades]);
     }
 
 
@@ -118,7 +126,7 @@ class UsersController extends AdminBaseController
         }Catch(\Exception $e){
             Error::create([
                 'user_id' => $requested_user->id,
-                'error' => 'Failed to create user',
+                'error' => 'Failed to remove user',
                 'description' => $e,
                 'type' => 2,
             ]);
@@ -208,4 +216,12 @@ class UsersController extends AdminBaseController
 
         return view('admin.users.update', ['status' => $status]);
     }
+
+    public function userGrade($uuid) {
+        $user = User::where('uuid','=',$uuid)->get()->first();
+        $grades = Grades::all();
+
+        return view('admin.users.user-grades',['user']);
+    }
+
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-// ADMIN
+// ADMIN - USERS
 
 Breadcrumbs::register('Administración', function($breadcrumbs) {
     $breadcrumbs->push('Administración', action('adminController@dashboard'));
@@ -22,10 +22,17 @@ Breadcrumbs::register('createUser', function($breadcrumbs) {
     $breadcrumbs->push('createUser', action('Admin\UsersController@addUser'));
 });
 
-Breadcrumbs::register('Editar', function($breadcrumbs) {
+Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Usuarios');
-    $breadcrumbs->push('Editar', action('Admin\UsersController@addUser'));
+    $breadcrumbs->push('Editar', action('Admin\UsersController@editUser',$uuid));
 });
+
+Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Usuarios');
+    $breadcrumbs->push('Eliminar', action('Admin\UsersController@removeUser',$uuid));
+});
+
+// ADMIN - GRADES
 
 Breadcrumbs::register('Grados', function($breadcrumbs) {
     $breadcrumbs->parent('Administración');
@@ -35,4 +42,9 @@ Breadcrumbs::register('Grados', function($breadcrumbs) {
 Breadcrumbs::register('Agregar', function($breadcrumbs) {
     $breadcrumbs->parent('Grados');
     $breadcrumbs->push('Agregar', action('Admin\GradesController@addGrade'));
+});
+
+Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Grados');
+    $breadcrumbs->push('Eliminar', action('Admin\GradesController@remove',$uuid));
 });

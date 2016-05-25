@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Auth;
 use Illuminate\Http\Request;
 use Validation;
+use Webpatser\Uuid\Uuid as UUID;
 
 class GradesController extends AdminBaseController
 {
@@ -48,7 +49,8 @@ class GradesController extends AdminBaseController
         try{
             if(!Grade::where('name','=',$data['Grado'])->exists()){
                 Grade::create([
-                    'name' => $data['Grado']
+                    'name' => $data['Grado'],
+                    'uuid' => UUID::generate(4)
                 ]);
                 $status = (object) array(
                     'created' => 'success',
@@ -78,8 +80,21 @@ class GradesController extends AdminBaseController
     }
 
 
-    public function remove() {
+    public function remove($uuid) {
+        $requested_user = Auth::user();
+        try{
+            $grade = Grade::where('uuid','=',$uuid)->delete();
+        }Catch(\Exception $e){
+            Error::create([
+                'user_id' => $requested_user->id,
+                'error' => 'Failed to remove grade',
+                'description' => $e,
+                'type' => 2,
+            ]);
+        }
 
+        $grades = Grade::all();
+        return redirect()->action('Admin\GradesController@index', ['grades'=>$grades]);
     }
 
 }

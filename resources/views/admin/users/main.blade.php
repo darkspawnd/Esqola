@@ -29,17 +29,17 @@
         <div class="ui segment">
             <table class="ui celled table" id="users-table">
                 <thead>
-                    <th class="collapsing">Id</th>
+                    <th class="collapsing">#</th>
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Rol</th>
                     <th class="collapsing">Acciones</th>
                 </thead>
                 <tbody>
-                    @foreach($users as $current_user)
+                    @foreach($users as $key => $current_user)
                         @if(!$current_user->hasRole('admin'))
                         <tr>
-                            <td> {{{ $current_user->id }}} </td>
+                            <td> {{{ $key+1 }}} </td>
                             <td> {{{ $current_user->full_name() }}} </td>
                             <td> {{{ $current_user->email }}} </td>
                             <td> {{{ $current_user->roles()->pluck('name') }}} </td>
@@ -78,13 +78,13 @@
         <div class="ui segment">
             <table class="ui celled table">
                 <thead>
-                <th class="collapsing">Id</th>
+                <th class="collapsing">#</th>
                 <th>Rol</th>
                 </thead>
                 <tbody>
-                @foreach($roles as $current_role)
+                @foreach($roles as $key => $current_role)
                     <tr>
-                        <td> {{{ $current_role->id }}} </td>
+                        <td> {{{ $key+1 }}} </td>
                         <td> {{{ $current_role->name }}} </td>
                     </tr>
                 @endforeach
