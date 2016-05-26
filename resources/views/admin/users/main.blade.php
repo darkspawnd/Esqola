@@ -27,7 +27,7 @@
             </a>
         </div>
         <div class="ui segment">
-            <table class="ui celled table" id="users-table">
+            <table class="ui fixed table" id="users-table">
                 <thead>
                     <th class="collapsing">#</th>
                     <th>Nombre</th>
@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="ui segment">
-            <table class="ui celled table">
+            <table class="ui fixed table">
                 <thead>
                 <th class="collapsing">#</th>
                 <th>Rol</th>

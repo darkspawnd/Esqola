@@ -27,9 +27,9 @@
             </a>
         </div>
         <div class="ui segment">
-            <table class="ui celled table" id="users-table">
+            <table class="ui fixed table" id="users-table">
                 <thead>
-                <th class="collapsing">Id</th>
+                <th class="collapsing">#</th>
                 <th>Grado</th>
                 <th class="collapsing">Acciones</th>
                 </thead>
@@ -48,7 +48,7 @@
                                         Opciones
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="item" data-value="{!! action('Admin\GradesController@remove',['uuid'=>$current_grade->uuid]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\GradesController@edit',['uuid'=>$current_grade->uuid]) !!}">
                                         Editar
                                     </div>
                                     <div class="item" data-value="{!! action('Admin\GradesController@remove',['uuid'=>$current_grade->uuid]) !!}">

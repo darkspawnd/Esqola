@@ -97,4 +97,66 @@ class GradesController extends AdminBaseController
         return redirect()->action('Admin\GradesController@index', ['grades'=>$grades]);
     }
 
+    public function edit($uuid) {
+        $requested_user = Auth::user();
+        if(Grade::where('uuid','=',$uuid)->exists()) {
+            $updating_grade = Grade::where('uuid','=',$uuid)->get()->first();
+            return View('admin.grades.update', ['grade' => $updating_grade]);
+        } else {
+            Error::create([
+                'user_id' => $requested_user->id,
+                'error' => 'Failed to edit grade, grade not found.',
+                'description' => 'Grade not found',
+                'type' => 2,
+            ]);
+            return View('admin.grades.main');
+        }
+    }
+
+    public function update(Request $data) {
+        $user = Auth::user();
+        $message = [
+            'required' => 'El campo :attribute es requerido.',
+            'confirmed' => 'Las contraseñas no coinciden.',
+            'min' => 'El campo :attribute debe de cumplir con el número de caracteres.'
+        ];
+        $this->validate($data, [
+            'Grado' => 'required',
+        ], $message);
+
+        try {
+            if(!Grade::where('uuid','=',$data['auth'])->exists()){
+                $status = (object) array(
+                    'created' => 'error',
+                    'message' => 'Error grado no existe.',
+                );
+            }else{
+                $to_edit = Grade::where('uuid','=',$data['auth'])->get()->first();
+                $to_edit->name = $data['Grado'];
+
+                $to_edit->save();
+
+                $status = (object) array(
+                    'created' => 'success',
+                    'message' => 'Grado actualizado satisfactoriamente.',
+                );
+
+                return view('admin.grades.update', ['status' => $status, 'grade'=>$to_edit]);
+            }
+        } catch(\Exception $e) {
+            Error::create([
+                'user_id' => $user->id,
+                'error' => 'Failed to update grade',
+                'description' => $e,
+                'type' => 2,
+            ]);
+            $status = (object) array(
+                'created' => 'error',
+                'message' => 'Error al editar grado intente de nuevo.',
+            );
+        }
+
+        return view('admin.grades.main', ['status' => $status]);
+    }
+
 }

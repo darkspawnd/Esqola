@@ -35,5 +35,7 @@ Route::post('/admin/users/update/',['as'=>'Editar','uses'=>'Admin\UsersControlle
 Route::get('/admin/grades', ['as'=>'Grados','uses'=>'Admin\GradesController@index']);
 Route::get('/admin/grades/add', ['as'=>'Agregar','uses'=>'Admin\GradesController@addGrade']);
 Route::get('/admin/grades/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\GradesController@remove']);
+Route::get('/admin/grades/update/{uuid}', ['as'=>'Editar','uses'=>'Admin\GradesController@edit']);
 
 Route::post('/admin/grades/add', ['as'=>'Agregar','uses'=>'Admin\GradesController@create']);
+Route::post('/admin/grades/update', ['as'=>'Editar','uses'=>'Admin\GradesController@update']);

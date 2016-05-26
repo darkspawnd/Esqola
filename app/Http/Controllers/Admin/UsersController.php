@@ -35,10 +35,6 @@ class UsersController extends AdminBaseController
         $roles = Roles::where('name','!=','admin')->get();
         $permissions = Permission::all();
 
-        $user_at = User::find(2)->attribute->remove();
-        var_dump($user_at);
-        exit();
-
         return view('admin.users.main', ['users'=>$usersList, 'roles'=>$roles]);
     }
 

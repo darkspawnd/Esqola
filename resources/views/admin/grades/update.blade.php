@@ -29,15 +29,16 @@
                     <li>{{ $status->message }}</li>
                 </div>
             @endif
-            <form method="post" class="ui form error" role="form" action="{!! action('Admin\GradesController@create') !!}">
+            <form method="post" class="ui form error" role="form" action="{!! action('Admin\GradesController@update') !!}">
                 {!! csrf_field() !!}
+                {{ Form::hidden('auth', $grade->uuid) }}
                 <div class="required field">
                     <label class="ui"> Grado </label>
-                    <input type="text" name="Grado" value="{{ old('Grado') }}">
+                    <input type="text" name="Grado" value="{{{ $grade->name }}}">
                 </div>
                 <div class="field align-to-right">
                     <button class="ui button orange active submit">
-                        <i class="icon add"></i>Añadir
+                        <i class="icon add"></i>Editar
                     </button>
                 </div>
             </form>

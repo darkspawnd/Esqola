@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,6 +69,10 @@
             <a class="ui item orange">
                 <i class="icon setting"></i>
                 Ajustes
+            </a>
+            <a class="ui item orange">
+                <i class="icon browser"></i>
+                Log
             </a>
             <a class="ui item orange" href="{!! url('/logout') !!}">
                 <i class="icon moon"></i>

@@ -48,3 +48,13 @@ Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Grados');
     $breadcrumbs->push('Eliminar', action('Admin\GradesController@remove',$uuid));
 });
+
+Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Grados');
+    $breadcrumbs->push('Editar', action('Admin\GradesController@edit',$uuid));
+});
+
+Breadcrumbs::register('Editar', function($breadcrumbs) {
+    $breadcrumbs->parent('Grados');
+    $breadcrumbs->push('Editar', action('Admin\GradesController@update'));
+});
