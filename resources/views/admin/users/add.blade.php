@@ -10,20 +10,14 @@
             </div>
         </div>
     </div>
-    <div class="ui segments small-form">
+    <div class="ui segments">
         <div class="ui menu attached right icon labeled aligned">
             <div class="ui header item borderless">
                Agregar Usuario
             </div>
         </div>
         <div class="ui segment">
-            @if(count($errors) > 0)
-                <div class="ui error message">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </div>
-            @endif
+            @include ('_partials.formerrors')
             @if(isset($status))
                 <div class="ui {{$status->created}} message">
                     <li>{{ $status->message }}</li>
@@ -34,7 +28,10 @@
                 <h4 class="ui horizontal header divider">
                     General
                 </h4>
-
+                    <div class="required field">
+                        <label class="ui"> Código </label>
+                        <input type="text" name="bk" value="{{ old('bk') }}">
+                    </div>
                     <div class="required field">
                         <label class="ui"> Nombre </label>
                         <input type="text" name="Nombre" value="{{ old('Nombre') }}">
@@ -70,7 +67,6 @@
                         <label class="ui"> Confirmar Contraseña </label>
                         <input type="password" name="Contraseña_confirmation">
                     </div>
-
                 <div class="field">
                     <label>Rol</label>
                     <select class="ui dropdown normal" name="role">
@@ -85,8 +81,8 @@
                     <input type="text" name="encargado">
                 </div>
                 <div class="field">
-                    <label class="ui" name="infoEncargado"> Información encargado </label>
-                    <textarea rows="2"></textarea>
+                    <label class="ui"> Información encargado </label>
+                    <textarea rows="2" name="infoEncargado"></textarea>
                 </div>
                 <div class="field align-to-right">
                     <button class="ui orange submit button">

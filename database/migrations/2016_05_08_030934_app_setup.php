@@ -46,7 +46,7 @@ class AppSetup extends Migration
             $table->integer('course_id')->unsigned();
             $table->integer('unit_id')->unsigned();
             $table->string('title',255);
-            $table->string('description');
+            $table->text('description');
             $table->string('file');
             $table->dateTime('due_date');
             $table->timestamps();
@@ -78,7 +78,7 @@ class AppSetup extends Migration
             $table->integer('unit_id')->unsigned();
             $table->integer('course_id')->unsigned();
             $table->string('title',255);
-            $table->string('description');
+            $table->text('description');
             $table->string('file_path');
         });
 

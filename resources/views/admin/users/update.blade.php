@@ -7,13 +7,7 @@
             </div>
         </div>
         <div class="ui segment">
-            @if(count($errors) > 0)
-                <div class="ui error message">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </div>
-            @endif
+            @include ('_partials.formerrors')
             @if(isset($status))
                 <div class="ui {{$status->created}} message">
                     <li>{{ $status->message }}</li>
@@ -21,42 +15,53 @@
             @endif
             <form method="post" class="ui form error" role="form" action="{!! action('Admin\UsersController@updateUser') !!}">
                 {!! csrf_field() !!}
-                <div class="two fields">
-                    <div class="required field">
-                        <label class="ui"> Nombre </label>
-                        <input type="text" name="Nombre" value="{{{ $update_user->name or ""}}}">
-                    </div>
-                    <div class="required field">
-                        <label class="ui"> Apellido </label>
-                        <input type="text" name="Apellido" value="{{{ $update_user->lastname or "" }}}">
-                    </div>
+                <h4 class="ui horizontal header divider">
+                    General
+                </h4>
+                <input type="hidden" name="auth" value="{!! $update_user->uuid !!}"/>
+                <div class="field">
+                    <label class="ui"> Código </label>
+                    <input type="text" name="bk" value="{{{ $update_user->BK or ""}}}">
                 </div>
-                <div class="two fields">
-                    <div class="required field">
-                        <label class="ui"> Email </label>
-                        <input type="text" readonly name="Email" value="{{{ $update_user->email or "" }}}">
-                    </div>
-                    <div class="field">
-                        <label class="ui"> Teléfono </label>
-                        <input type="number" name="Telefono" value="{{{ $update_user->telephone or "" }}}">
-                    </div>
+                <div class="required field">
+                    <label class="ui"> Nombre </label>
+                    <input type="text" name="Nombre" value="{{{ $update_user->name or ""}}}">
                 </div>
-                <div class="two fields">
-                    <div class="field">
-                        <label class="ui"> Dirección </label>
-                        <input type="text" name="address" value="{{{ $update_user->address or "" }}}">
-                    </div>
-                    <div class="field">
-                        <label class="ui"> Edad </label>
-                        <input type="number" name="Edad" value="{{{ $update_user->age or "" }}}">
-                    </div>
+                <div class="required field">
+                    <label class="ui"> Apellido </label>
+                    <input type="text" name="Apellido" value="{{{ $update_user->lastname or "" }}}">
+                </div>
+                <div class="required field">
+                    <label class="ui"> Email </label>
+                    <input type="text"  name="Email" value="{{{ $update_user->email or "" }}}">
+                </div>
+                <div class="field">
+                    <label class="ui"> Teléfono </label>
+                    <input type="number" name="Telefono" value="{{{ $update_user->telephone or "" }}}">
+                </div>
+                <div class="field">
+                    <label class="ui"> Dirección </label>
+                    <input type="text" name="address" value="{{{ $update_user->address or "" }}}">
+                </div>
+                <div class="field">
+                    <label class="ui"> Edad </label>
+                    <input type="number" name="Edad" value="{{{ $update_user->age or "" }}}">
                 </div>
                 <div class="field">
                     <label>Rol</label>
                     <select class="ui dropdown normal" name="role" selected="1">
-                        <option class="ui" value="student">Estudiante</option>
-                        <option class="ui" value="teacher">Maestro</option>
+                        <option class="ui" value="Estudiante">Estudiante</option>
+                        <option class="ui" value="Maestro">Maestro</option>
                     </select>
+                </div>
+                <h4 class="ui horizontal header divider">Información </h4>
+                <div class="field">
+                    <label class="ui"> Encargado </label>
+                    <input type="text" name="encargado" value="{{{ $update_user->attribute->incharge  }}}">
+                </div>
+                <div class="field">
+                    <label class="ui"> Información encargado </label>
+                    <textarea rows="2" name="infoEncargado">{{{$update_user->attribute->incharge_info}}}</textarea>
                 </div>
                 <div class="field align-to-right">
                     <button class="ui basic submit button">

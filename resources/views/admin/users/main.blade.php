@@ -27,7 +27,7 @@
             </a>
         </div>
         <div class="ui segment">
-            <table class="ui fixed table" id="users-table">
+            <table class="ui fixed table selectable" id="users-table">
                 <thead>
                     <th class="collapsing">#</th>
                     <th>Nombre</th>
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="divider"></div>
                                         <div class="item" data-value="{!! action('Admin\UsersController@editUser',['uuid'=>$current_user->uuid]) !!}">
-                                            Editar
+                                            Configuración
                                         </div>
                                         <div class="item" data-value="{!! action('Admin\UsersController@removeUser',['uuid'=>$current_user->uuid]) !!}">
                                             Eliminar
@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="ui segment">
-            <table class="ui fixed table">
+            <table class="ui fixed table selectable">
                 <thead>
                 <th class="collapsing">#</th>
                 <th>Rol</th>

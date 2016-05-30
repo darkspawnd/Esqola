@@ -10,6 +10,7 @@
             </div>
         </div>
     </div>
+    @include ('_partials.esqolastatistics', ['statistics'=>$statistics])
     <script type="application/javascript">
         $('.dashboard-home').addClass('active');
     </script>

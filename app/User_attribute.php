@@ -9,7 +9,4 @@ class User_attribute extends Model
     protected $table = "user_attributes";
     protected $fillable = ['user_id', 'grade', 'incharge', 'incharge_info', 'avatar'];
 
-    public function User() {
-        return $this->belongsTo('App\User');
-    }
 }

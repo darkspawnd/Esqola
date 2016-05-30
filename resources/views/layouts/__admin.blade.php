@@ -42,12 +42,12 @@
 <div class="ui scrollablecontent">
     <div class="left-menu">
         <div class="ui attached vertical menu icon labeled left">
-            <a class="ui item orange dashboard-home" href="{!! action('adminController@dashboard') !!}">
+            <a class="ui item orange dashboard-home" href="{!! action('Admin\DashboardController@index') !!}">
                 <i class="icon dashboard"></i>
                 Dashboard
             </a>
             <a class="ui item orange users-home" href="{!! action('Admin\UsersController@mainUsers') !!}">
-                <i class="icon user"></i>
+                <i class="icon university"></i>
                 General
             </a>
             <a class="ui item orange">
@@ -70,7 +70,7 @@
                 <i class="icon setting"></i>
                 Ajustes
             </a>
-            <a class="ui item orange">
+            <a class="ui item orange log-home" href="{!! action('Admin\SystemController@log') !!}">
                 <i class="icon browser"></i>
                 Log
             </a>

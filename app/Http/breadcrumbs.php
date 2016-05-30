@@ -4,7 +4,7 @@
 // ADMIN - USERS
 
 Breadcrumbs::register('Administración', function($breadcrumbs) {
-    $breadcrumbs->push('Administración', action('adminController@dashboard'));
+    $breadcrumbs->push('Administración', action('Admin\DashboardController@index'));
 });
 
 Breadcrumbs::register('Usuarios', function($breadcrumbs) {
@@ -57,4 +57,35 @@ Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
 Breadcrumbs::register('Editar', function($breadcrumbs) {
     $breadcrumbs->parent('Grados');
     $breadcrumbs->push('Editar', action('Admin\GradesController@update'));
+});
+
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Breadcrumbs::register('Log', function($breadcrumbs) {
+    $breadcrumbs->parent('Administración');
+    $breadcrumbs->push('Log', action('Admin\SystemController@log'));
+});
+
+Breadcrumbs::register('Descripción', function($breadcrumbs,$id) {
+    $breadcrumbs->parent('Log');
+    $breadcrumbs->push('Descripción', action('Admin\SystemController@LogDescription',$id));
 });

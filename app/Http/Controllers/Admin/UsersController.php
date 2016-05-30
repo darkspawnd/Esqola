@@ -6,6 +6,7 @@ use App\errors as Error;
 use App\Grades as Grade;
 use App\Http\Requests;
 use App\User as User;
+use App\User_attribute as Attributes;
 use Auth;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission as Permission;
@@ -52,6 +53,7 @@ class UsersController extends AdminBaseController
      */
 
     public function createUser(Request $data) {
+
         $user = Auth::user();
         $message = [
             'required' => 'El campo :attribute es requerido.',
@@ -73,6 +75,7 @@ class UsersController extends AdminBaseController
                 );
             }else{
                 $saved_user = User::create([
+                    'bk' => $data['bk'],
                     'name' => $data['Nombre'],
                     'lastname' => $data['Apellido'],
                     'telephone' => $data['Telefono'],
@@ -85,6 +88,12 @@ class UsersController extends AdminBaseController
                 ]);
 
                 $saved_user->assignRole($data['role']);
+
+                $attribute = new Attributes(array(
+                    'incharge' => $data['encargado'],
+                    'incharge_info' => $data['infoEncargado']
+                ));
+                $saved_user->attribute()->save($attribute);
 
                 $status = (object) array(
                     'created' => 'success',
@@ -140,15 +149,15 @@ class UsersController extends AdminBaseController
         $requested_user = Auth::user();
         if(User::where('uuid','=',$uuid)->exists()) {
             $updating_user = User::where('uuid','=',$uuid)->get()->first();
-            return View('admin.users.update', ['user'=>$requested_user, 'update_user'=>$updating_user]);
+            return View('admin.users.update', ['update_user'=>$updating_user]);
         } else {
             Error::create([
                 'user_id' => $requested_user->id,
                 'error' => 'Failed to edit user, user not found.',
-                'description' => $e,
+                'description' => 'User not found',
                 'type' => 2,
             ]);
-            return View('admin.users.main',['user'=>$requested_user]);
+            return redirect()->action('Admin\UsersController@mainUsers');
         }
     }
 
@@ -169,35 +178,36 @@ class UsersController extends AdminBaseController
             'Nombre' => 'required',
             'Apellido' => 'required'
         ], $message);
-
         try {
-            if(!User::where('email','=',$data['Email'])->exists()){
-                $status = (object) array(
-                    'created' => 'error',
-                    'message' => 'No hay usuario registrado con este correo.',
-                );
-            }else{
-                $to_edit = User::where('email','=',$data['Email'])->get()->first();
-                $to_edit->name = $data['Nombre'];
-                $to_edit->lastname = $data['Apellido'];
-                $to_edit->address = $data['address'];
-                $to_edit->age = $data['Edad'];
+            $uuid = $data['auth'];
+            $to_edit = User::where('uuid','=',$uuid)->get()->first();
+            $to_edit->bk = $data['bk'];
+            $to_edit->name = $data['Nombre'];
+            $to_edit->lastname = $data['Apellido'];
+            $to_edit->email = $data['Email'];
+            $to_edit->telephone = $data['Telefono'];
+            $to_edit->address = $data['address'];
+            $to_edit->age = $data['Edad'];
 
-                $to_edit->save();
+            $to_edit->save();
 
-                $to_edit->removeRole('teacher');
-                $to_edit->removeRole('student');
+            $to_edit_attributes = Attributes::where('user_id','=',$to_edit->id)->get()->first();
+            $to_edit_attributes->incharge = $data['encargado'];
+            $to_edit_attributes->incharge_info = $data['infoEncargado'];
+            $to_edit_attributes->save();
 
-                $to_edit->assignRole($data['role']);
+            $to_edit->roles()->detach();
 
-                $status = (object) array(
-                    'created' => 'success',
-                    'message' => 'Usuario actualizado satisfactoriamente.',
-                );
+            $to_edit->assignRole($data['role']);
 
-                return view('admin.users.update', ['status' => $status, 'update_user'=>$to_edit]);
-            }
+            $status = (object) array(
+                'created' => 'success',
+                'message' => 'Usuario actualizado satisfactoriamente.'
+            );
+
+            return View('admin.users.update', ['update_user'=>$to_edit, 'status'=>$status]);
         } catch(\Exception $e) {
+            $to_edit = User::where('uuid','=',$uuid)->get()->first();
             Error::create([
                 'user_id' => $user->id,
                 'error' => 'Failed to update user',
@@ -209,14 +219,12 @@ class UsersController extends AdminBaseController
                 'message' => 'Error al editar usuario intente de nuevo.',
             );
         }
-
-        return view('admin.users.update', ['status' => $status]);
+        return View('admin.users.update', ['update_user'=>$to_edit, 'status'=>$status]);
     }
 
     public function userGrade($uuid) {
         $user = User::where('uuid','=',$uuid)->get()->first();
         $grades = Grades::all();
-
         return view('admin.users.user-grades',['user']);
     }
 
