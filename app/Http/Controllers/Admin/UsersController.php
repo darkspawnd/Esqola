@@ -6,6 +6,7 @@ use App\errors as Error;
 use App\Grades as Grade;
 use App\Http\Requests;
 use App\User as User;
+use App\User_Grade as Relation;
 use App\User_attribute as Attributes;
 use Auth;
 use Illuminate\Http\Request;
@@ -42,7 +43,8 @@ class UsersController extends AdminBaseController
     public function addUser() {
         $roles = Roles::where('name','!=','admin')->get();
         $grades = Grade::all();
-        return view('admin.users.add',['roles'=>$roles, 'grades'=>$grades]);
+        $grados = Grade::all();
+        return view('admin.users.add',['roles'=>$roles, 'grades'=>$grades, 'grados'=>$grados]);
     }
 
 
@@ -53,7 +55,6 @@ class UsersController extends AdminBaseController
      */
 
     public function createUser(Request $data) {
-
         $user = Auth::user();
         $message = [
             'required' => 'El campo :attribute es requerido.',
@@ -74,31 +75,40 @@ class UsersController extends AdminBaseController
                     'message' => 'Ya hay un usuario registrado con ese email.',
                 );
             }else{
-                $saved_user = User::create([
-                    'bk' => $data['bk'],
-                    'name' => $data['Nombre'],
-                    'lastname' => $data['Apellido'],
-                    'telephone' => $data['Telefono'],
-                    'email' => $data['Email'],
-                    'address' => $data['address'],
-                    'age' => $data['Edad'],
-                    'uuid' => UUID::generate(4),
-                    'password' => bcrypt($data['Contraseña']),
-                    'firstaccess' => 1,
-                ]);
+               // if(Grade::where('name','=', $data['Grados'])->exists()){
+                    $saved_user = User::create([
+                        'bk' => $data['bk'],
+                        'name' => $data['Nombre'],
+                        'lastname' => $data['Apellido'],
+                        'telephone' => $data['Telefono'],
+                        'email' => $data['Email'],
+                        'address' => $data['address'],
+                        'age' => $data['Edad'],
+                        'uuid' => UUID::generate(4),
+                        'password' => bcrypt($data['Contraseña']),
+                        'firstaccess' => 1,
+                    ]);
 
-                $saved_user->assignRole($data['role']);
+                    new Relation (array(
+                        'user_id' => $saved_user->uuid,
+                        'grade_id' => $data['Grados'],
+                    ));
+                    //$saved_user->attribute()->save($attribute);
 
-                $attribute = new Attributes(array(
-                    'incharge' => $data['encargado'],
-                    'incharge_info' => $data['infoEncargado']
-                ));
-                $saved_user->attribute()->save($attribute);
+                    $saved_user->assignRole($data['role']);
+
+                    $attribute = new Attributes(array(
+                        'incharge' => $data['encargado'],
+                        'incharge_info' => $data['infoEncargado']
+                    ));
+                    $saved_user->attribute()->save($attribute);
+                //}
 
                 $status = (object) array(
                     'created' => 'success',
-                    'message' => 'Usuario creado satisfactoriamente.',
+                    'message' => $data['Grados'],
                 );
+
             }
         } catch(\Exception $e) {
             Error::create([
@@ -114,7 +124,8 @@ class UsersController extends AdminBaseController
         }
         $roles = Roles::where('name','!=','admin')->get();
         $grades = Grade::all();
-        return view('admin.users.add', ['status' => $status, 'roles'=>$roles, 'grades'=>$grades]);
+        $grados = Grade::all();
+        return view('admin.users.add', ['status' => $status, 'roles'=>$roles, 'grades'=>$grades, 'grados'=>$grados]);
     }
 
 
