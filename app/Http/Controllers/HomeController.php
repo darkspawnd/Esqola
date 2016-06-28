@@ -32,4 +32,8 @@ class HomeController extends Controller
         if($user->hasRole('student'))
             return redirect()->action('student@dashboard');
     }
+    public function logout(){
+        Auth::logout();
+        return redirect()->action('HomeController@index');
+    }
 }

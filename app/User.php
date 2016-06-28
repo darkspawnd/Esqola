@@ -29,6 +29,9 @@ class User extends Authenticatable
     public function attribute() {
         return $this->hasOne('App\User_attribute');
     }
+    public function grade_user() {
+        return $this->belongsToMany('App\user_grade','rltn_user_grade');
+    }
 
     public function settings() {
         return $this->hasOne('App\User_settings');

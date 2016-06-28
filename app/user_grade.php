@@ -13,8 +13,6 @@ class user_grade extends Model
         'grade_id'
     ];
 
-    public function User() {
-        return $this->belongsTo('App\User_Grade');
-    }
+
 
 }

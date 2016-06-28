@@ -17,7 +17,7 @@
 
 Route::auth();
 Route::get('/', ['as'=>'Inicio','uses'=>'HomeController@index']);
-
+Route::get('logout','HomeController@logout');
 
 //ADMINISTRATION
 Route::get('/admin', ['as'=>'Administración','uses'=>'Admin\DashboardController@index']);

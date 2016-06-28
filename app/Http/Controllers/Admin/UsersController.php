@@ -6,7 +6,7 @@ use App\errors as Error;
 use App\Grades as Grade;
 use App\Http\Requests;
 use App\User as User;
-use App\User_Grade as Relation;
+use App\user_grade as Relation;
 use App\User_attribute as Attributes;
 use Auth;
 use Illuminate\Http\Request;
@@ -89,10 +89,11 @@ class UsersController extends AdminBaseController
                         'firstaccess' => 1,
                     ]);
 
-                    new Relation (array(
+                    $grade_user = new Relation (array(
                         'user_id' => $saved_user->uuid,
                         'grade_id' => $data['Grados'],
                     ));
+                    $saved_user->grade_user()->save($grade_user);
                     //$saved_user->attribute()->save($attribute);
 
                     $saved_user->assignRole($data['role']);

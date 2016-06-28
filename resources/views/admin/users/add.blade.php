@@ -25,6 +25,9 @@
             @endif
             <form method="post" class="ui form error" role="form" action="{!! action('Admin\UsersController@createUser') !!}">
                 {!! csrf_field() !!}
+                <!--Toke  vacio-->
+                    <meta name="csrf-token" content="{{ csrf_token() }}" />
+                    <!--Toke  vacio-->
                 <h4 class="ui horizontal header divider">
                     General
                 </h4>
