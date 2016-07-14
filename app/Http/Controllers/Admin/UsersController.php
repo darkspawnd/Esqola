@@ -6,10 +6,10 @@ use App\errors as Error;
 use App\Grades as Grade;
 use App\Http\Requests;
 use App\User as User;
-use App\user_grade as Relation;
 use App\User_attribute as Attributes;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Spatie\Permission\Models\Permission as Permission;
 use Spatie\Permission\Models\Role as Roles;
 use Validation;
@@ -75,7 +75,6 @@ class UsersController extends AdminBaseController
                     'message' => 'Ya hay un usuario registrado con ese email.',
                 );
             }else{
-               // if(Grade::where('name','=', $data['Grados'])->exists()){
                     $saved_user = User::create([
                         'bk' => $data['bk'],
                         'name' => $data['Nombre'],
@@ -89,11 +88,12 @@ class UsersController extends AdminBaseController
                         'firstaccess' => 1,
                     ]);
 
-                    $grade_user = new Relation (array(
-                        'user_id' => $saved_user->uuid,
-                        'grade_id' => $data['Grados'],
-                    ));
-                    $saved_user->grade_user()->save($grade_user);
+                    //$Rol = Input::get('rol');
+                    //$rowGrade = Grade::where('name','=',$data['gradeStudent'])->first();
+                     //$idGrade = $rowGrade->id;
+                     $idUser = $saved_user->id;
+                     $relacion = User::find($idUser);
+                    //$saved_user->role_id()->attach($data['Grados']);
                     //$saved_user->attribute()->save($attribute);
 
                     $saved_user->assignRole($data['role']);
@@ -105,9 +105,23 @@ class UsersController extends AdminBaseController
                     $saved_user->attribute()->save($attribute);
                 //}
 
+                if ($data['role'] == "Estudiante"){
+                    $rowGrade = Grade::where('name','=',$data['gradeStudent'])->first();
+                    $idGrade = $rowGrade->id;
+                    $idUser = $saved_user->id;
+                    $relacion->usgra()->attach($idGrade);
+                }
+                if ($data['role'] == "Maestro"){
+                    foreach ($data['gradesTeacher'] as $gradesTeacher) {
+                        $rowGrade = Grade::where('name','=',$gradesTeacher)->first();
+                        $idGrade = $rowGrade->id;
+                        $relacion->usgra()->attach($idGrade);
+                    }
+                }
+
                 $status = (object) array(
                     'created' => 'success',
-                    'message' => $data['Grados'],
+                    'message' => 'Se ha creado exitosamente!',
                 );
 
             }

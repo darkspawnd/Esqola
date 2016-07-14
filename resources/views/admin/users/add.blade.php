@@ -81,9 +81,9 @@
                 <!-- Select Grado Estudiante-->
                 <div id="gradeE" style="display:none;" class="field">
                     <label>Grado</label>
-                    <select  class="ui dropdown normal" name="Grados">
+                    <select  class="ui dropdown normal" name="gradeStudent">
                         @foreach($grades as $grades)
-                            <option class="ui" value="{{{$grades->name}}}">{{{$grades->name}}}</option>
+                            <option class="ui" id="{{{$grades->id}}}" value="{{{$grades->name}}}">{{{$grades->name}}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -95,7 +95,7 @@
                         <div class="field">
                             @foreach($grados as $grad)
                                 <div class="ui checkbox">
-                                    <input type="checkbox" name="op" value="{{{$grad->name}}}">
+                                    <input type="checkbox" id="one" name="gradesTeacher[]" value="{{{$grad->name}}}">
                                     <label>{{{$grad->name}}}</label>
                                 </div>
                                 </br>
