@@ -59,11 +59,37 @@
                 </div>
                 <div class="field">
                     <label>Rol</label>
-                    <select class="ui dropdown normal" name="role" selected="1">
+                    <select id="rol" class="ui dropdown normal" name="role" onchange="cambio()" selected="1">
                         <option class="ui" value="Estudiante">Estudiante</option>
                         <option class="ui" value="Maestro">Maestro</option>
                     </select>
                 </div>
+                <!-- Select Grado Estudiante-->
+                <div id="gradeE" style="display:none;" class="field">
+                    <label>Grado</label>
+                    <select  class="ui dropdown normal" name="gradeStudent">
+                        @foreach($grades as $grades)
+                            <option class="ui" id="{{{$grades->id}}}" value="{{{$grades->name}}}">{{{$grades->name}}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <p id="show"></p>
+                <!-- Select Grado Estudiante-->
+                <!-- Select Grado Maestro-->
+                <div id="gradeM" style="display:none;" class="ui form">
+                    <div class="grouped fields">
+                        <div class="field">
+                            @foreach($grados as $grad)
+                                <div class="ui checkbox">
+                                    <input type="checkbox" id="one" name="gradesTeacher[]" value="{{{$grad->name}}}">
+                                    <label>{{{$grad->name}}}</label>
+                                </div>
+                                </br>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <!-- Select Grado Mestro-->
                 <h4 class="ui horizontal header divider">Información </h4>
                 <div class="field">
                     <label class="ui"> Encargado </label>
@@ -83,5 +109,21 @@
     </div>
     <script type="application/javascript">
         $('.users-home').addClass('active');
+
+        function cambio(){
+            var x = document.getElementById("rol").value;
+            if (x == 'Estudiante')
+            {
+                document.getElementById('gradeE').style.display = "block";
+                document.getElementById('gradeM').style.display = "none";
+                //document.getElementById("show").innerHTML = "You selected: " + x;
+            }
+            if (x == 'Maestro')
+            {
+                document.getElementById('gradeE').style.display = "none";
+                document.getElementById('gradeM').style.display = "block";
+                //document.getElementById("show").innerHTML = "You selected: " + x;
+            }
+        }
     </script>
 @endsection

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\User as User;
 use App\User_attribute as Attributes;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Spatie\Permission\Models\Permission as Permission;
@@ -88,15 +89,9 @@ class UsersController extends AdminBaseController
                         'firstaccess' => 1,
                     ]);
 
-                    //$Rol = Input::get('rol');
-                    //$rowGrade = Grade::where('name','=',$data['gradeStudent'])->first();
-                     //$idGrade = $rowGrade->id;
                      $idUser = $saved_user->id;
                      $relacion = User::find($idUser);
-                    //$saved_user->role_id()->attach($data['Grados']);
-                    //$saved_user->attribute()->save($attribute);
-
-                    $saved_user->assignRole($data['role']);
+                     $saved_user->assignRole($data['role']);
 
                     $attribute = new Attributes(array(
                         'incharge' => $data['encargado'],
@@ -175,7 +170,9 @@ class UsersController extends AdminBaseController
         $requested_user = Auth::user();
         if(User::where('uuid','=',$uuid)->exists()) {
             $updating_user = User::where('uuid','=',$uuid)->get()->first();
-            return View('admin.users.update', ['update_user'=>$updating_user]);
+            $grades = Grade::all();
+            $grados = Grade::all();
+            return View('admin.users.update', ['update_user'=>$updating_user, 'grades'=>$grades, 'grados'=>$grados]);
         } else {
             Error::create([
                 'user_id' => $requested_user->id,
@@ -195,6 +192,8 @@ class UsersController extends AdminBaseController
 
     public function updateUser(Request $data) {
         $user = Auth::user();
+        $grades = Grade::all();
+        $grados = Grade::all();
         $message = [
             'required' => 'El campo :attribute es requerido.',
             'confirmed' => 'Las contraseñas no coinciden.',
@@ -205,6 +204,7 @@ class UsersController extends AdminBaseController
             'Apellido' => 'required'
         ], $message);
         try {
+
             $uuid = $data['auth'];
             $to_edit = User::where('uuid','=',$uuid)->get()->first();
             $to_edit->bk = $data['bk'];
@@ -214,7 +214,23 @@ class UsersController extends AdminBaseController
             $to_edit->telephone = $data['Telefono'];
             $to_edit->address = $data['address'];
             $to_edit->age = $data['Edad'];
-
+            $relation = User::find($to_edit->id);
+            //$users = DB::table('users')->get();
+            /////////////////
+            if ($data['role'] == "Estudiante"){
+                    $rowGrade = Grade::where('name','=',$data['gradeStudent'])->first();
+                    $relation->usgra()->detach();
+                    $relation->usgra()->attach($to_edit->id);
+            }
+            if ($data['role'] == "Maestro"){
+                $relation->usgra()->detach();
+                foreach ($data['gradesTeacher'] as $gradesTeacher) {
+                    //echo  $relation->usgra()->user_id;
+                    $rowGrade = Grade::where('name','=',$gradesTeacher)->first();
+                    $relation->usgra()->attach($rowGrade->id);
+                }
+            }
+            ////////////////
             $to_edit->save();
 
             $to_edit_attributes = Attributes::where('user_id','=',$to_edit->id)->get()->first();
@@ -231,7 +247,7 @@ class UsersController extends AdminBaseController
                 'message' => 'Usuario actualizado satisfactoriamente.'
             );
 
-            return View('admin.users.update', ['update_user'=>$to_edit, 'status'=>$status]);
+            return View('admin.users.update', ['update_user'=>$to_edit, 'status'=>$status, 'grades'=>$grades, 'grados'=>$grados]);
         } catch(\Exception $e) {
             $to_edit = User::where('uuid','=',$uuid)->get()->first();
             Error::create([
@@ -245,13 +261,14 @@ class UsersController extends AdminBaseController
                 'message' => 'Error al editar usuario intente de nuevo.',
             );
         }
-        return View('admin.users.update', ['update_user'=>$to_edit, 'status'=>$status]);
+        return View('admin.users.update', ['update_user'=>$to_edit, 'status'=>$status, 'grades'=>$grades, 'grados'=>$grados]);
     }
 
     public function userGrade($uuid) {
         $user = User::where('uuid','=',$uuid)->get()->first();
-        $grades = Grades::all();
-        return view('admin.users.user-grades',['user']);
+        $grades = Grade::all();
+        $grados = Grade::all();
+        return view('admin.users.user-grades',['user', 'grades'=>$grades, 'grados'=>$grados]);
     }
 
 }
