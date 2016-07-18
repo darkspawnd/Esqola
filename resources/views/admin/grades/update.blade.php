@@ -10,10 +10,10 @@
             </div>
         </div>
     </div>
-    <div class="ui segments small-form">
+    <div class="ui segments">
         <div class="ui menu attached right icon labeled aligned">
             <div class="ui header item borderless">
-                Agregar Grado
+                Editar Grado
             </div>
         </div>
         <div class="ui segment">

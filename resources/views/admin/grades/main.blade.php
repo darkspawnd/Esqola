@@ -7,7 +7,7 @@
         <a class="active item" href="{!! action('Admin\GradesController@index') !!}">
             Grados
         </a>
-        <a class="item">
+        <a class="item" href="{!! action('Admin\CoursesController@index') !!}">
             Materias
         </a>
         <div class="right menu">
@@ -48,6 +48,9 @@
                                         Opciones
                                     </div>
                                     <div class="divider"></div>
+                                    <div class="item" data-value="{!! action('Admin\GradesController@courses',['uuid'=>$current_grade->uuid]) !!}">
+                                        Agregar materias
+                                    </div>
                                     <div class="item" data-value="{!! action('Admin\GradesController@edit',['uuid'=>$current_grade->uuid]) !!}">
                                         Editar
                                     </div>

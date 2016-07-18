@@ -9,6 +9,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Validation;
 use Webpatser\Uuid\Uuid as UUID;
+use App\Courses as Course;
 
 class GradesController extends AdminBaseController
 {
@@ -157,6 +158,25 @@ class GradesController extends AdminBaseController
         }
 
         return view('admin.grades.main', ['status' => $status]);
+    }
+
+    public function courses($uuid) {
+
+        $requested_user = Auth::user();
+        if(Grade::where('uuid','=',$uuid)->exists()) {
+            $updating_grade = Grade::where('uuid','=',$uuid)->get()->first();
+            $courses = Course::all();
+            return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses]);
+        } else {
+            Error::create([
+                'user_id' => $requested_user->id,
+                'error' => 'Failed to edit grade, grade not found.',
+                'description' => 'Grade not found, cannot add course to invalid grade.',
+                'type' => 2,
+            ]);
+            return View('admin.grades.courses');
+        }
+
     }
 
 }

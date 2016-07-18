@@ -7,7 +7,7 @@
         <a class="item" href="{!! action('Admin\GradesController@index') !!}">
             Grados
         </a>
-        <a class="item">
+        <a class="item" href="{!! action('Admin\CoursesController@index') !!}">
             Materias
         </a>
         <div class="right menu">
