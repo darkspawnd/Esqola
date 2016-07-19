@@ -28,27 +28,28 @@ Route::get('/admin/users/add', ['as'=>'Agregar','uses'=>'Admin\UsersController@a
 Route::get('/admin/users/update/{uuid}',['as'=>'Editar','uses'=>'Admin\UsersController@editUser']);
 Route::get('/admin/users/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\UsersController@removeUser']);
 
-Route::post('/admin/users/add', ['as'=>'createUser', 'uses'=>'Admin\UsersController@createUser']);
-Route::post('/admin/users/update/',['as'=>'Editar','uses'=>'Admin\UsersController@updateUser']);
+Route::post('/admin/users/add', ['as'=>'Agregar', 'uses'=>'Admin\UsersController@createUser']);
+Route::post('/admin/users/update/',['as'=>'Editar Usuarios','uses'=>'Admin\UsersController@updateUser']);
 
 //ADMINISTRATION > GENERAL > GRADES
 Route::get('/admin/grades', ['as'=>'Grados','uses'=>'Admin\GradesController@index']);
-Route::get('/admin/grades/add', ['as'=>'Agregar','uses'=>'Admin\GradesController@addGrade']);
-Route::get('/admin/grades/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\GradesController@remove']);
-Route::get('/admin/grades/update/{uuid}', ['as'=>'Editar','uses'=>'Admin\GradesController@edit']);
-Route::get('/admin/grades/{uuid}/courses', ['as'=>'Materias','uses'=>'Admin\GradesController@courses']);
+Route::get('/admin/grades/add', ['as'=>'Agregar Grados','uses'=>'Admin\GradesController@addGrade']);
+Route::get('/admin/grades/remove/{uuid}', ['as'=>'Eliminar Grados','uses'=>'Admin\GradesController@remove']);
+Route::get('/admin/grades/update/{uuid}', ['as'=>'Editar Grados','uses'=>'Admin\GradesController@edit']);
+Route::get('/admin/grades/{uuid}/courses', ['as'=>'Grados - Materias','uses'=>'Admin\GradesController@courses']);
 
-Route::post('/admin/grades/add', ['as'=>'Agregar','uses'=>'Admin\GradesController@create']);
-Route::post('/admin/grades/update', ['as'=>'Editar','uses'=>'Admin\GradesController@update']);
+Route::post('/admin/grades/add', ['as'=>'Agregar Grados','uses'=>'Admin\GradesController@create']);
+Route::post('/admin/grades/update', ['as'=>'Editar Grados','uses'=>'Admin\GradesController@update']);
+Route::post('/admin/grades/course/update', ['as'=>'Editar Grados','uses'=>'Admin\GradesController@courseUpdate']);
 
 // ADMINISTRATION > GENERAL > COURSES
 Route::get('/admin/courses',['as'=>'Materias', 'uses'=>'Admin\CoursesController@index']);
-Route::get('/admin/courses/add',['as'=>'Agregar', 'uses'=>'Admin\CoursesController@add']);
-Route::get('/admin/courses/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\CoursesController@remove']);
-Route::get('/admin/courses/update/{uuid}', ['as'=>'Editar','uses'=>'Admin\CoursesController@edit']);
+Route::get('/admin/courses/add',['as'=>'Agregar Materias', 'uses'=>'Admin\CoursesController@add']);
+Route::get('/admin/courses/remove/{uuid}', ['as'=>'Eliminar Materias','uses'=>'Admin\CoursesController@remove']);
+Route::get('/admin/courses/update/{uuid}', ['as'=>'Editar Materias','uses'=>'Admin\CoursesController@edit']);
 
-Route::post('/admin/courses/add', ['as'=>'Agregar', 'uses'=>'Admin\CoursesController@create']);
-Route::post('/admin/courses/update', ['as'=>'Editar', 'uses'=>'Admin\CoursesController@update']);
+Route::post('/admin/courses/add', ['as'=>'Agregar Materias', 'uses'=>'Admin\CoursesController@create']);
+Route::post('/admin/courses/update', ['as'=>'Editar Materias', 'uses'=>'Admin\CoursesController@update']);
 
 //ADMINISTRATION > LOG
 Route::get('/admin/systemlog', ['as'=>'Log','uses'=>'Admin\SystemController@log']);

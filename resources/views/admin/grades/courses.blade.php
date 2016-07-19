@@ -23,15 +23,20 @@
                     <li>{{ $status->message }}</li>
                 </div>
             @endif
-            <form method="post" class="ui form error" role="form" action="{!! action('Admin\GradesController@update') !!}">
+            <form method="post" class="ui form error" role="form" action="{!! action('Admin\GradesController@courseUpdate') !!}">
                 {!! csrf_field() !!}
                 {{ Form::hidden('auth', $grade->uuid) }}
-                <div class="field">
-
-                </div>
+                @foreach($courses as $key => $course)
+                    <div class="field responsive-check-grid">
+                        <div class="ui checkbox">
+                            <input type="checkbox" name="courses[]" value="{{{ $course->uuid }}}" id="course-{{{ $key }}}">
+                            <label for="course-{{{ $key }}}"> {{{ $course->name }}} </label>
+                        </div>
+                    </div>
+                @endforeach
                 <div class="field align-to-right">
                     <button class="ui button orange active submit">
-                        <i class="icon add"></i>Editar
+                        <i class="icon add"></i>Actualizar
                     </button>
                 </div>
             </form>

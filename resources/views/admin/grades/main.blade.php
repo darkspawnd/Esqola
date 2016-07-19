@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="divider"></div>
                                     <div class="item" data-value="{!! action('Admin\GradesController@courses',['uuid'=>$current_grade->uuid]) !!}">
-                                        Agregar materias
+                                        Materias
                                     </div>
                                     <div class="item" data-value="{!! action('Admin\GradesController@edit',['uuid'=>$current_grade->uuid]) !!}">
                                         Editar

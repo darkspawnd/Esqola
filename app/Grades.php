@@ -13,4 +13,8 @@ class Grades extends Model
         return $this->hasManyThrough('App\Users','App\user_grade','grade_id', 'user_id');
     }
 
+    public function courses(){
+        return $this->belongsToMany('App\Courses', 'rltn_grade_course','grade_id', 'course_id');
+    }
+
 }

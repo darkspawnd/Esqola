@@ -17,9 +17,9 @@ Breadcrumbs::register('Agregar', function($breadcrumbs) {
     $breadcrumbs->push('Agregar', action('Admin\UsersController@addUser'));
 });
 
-Breadcrumbs::register('createUser', function($breadcrumbs) {
-    $breadcrumbs->parent('Agregar');
-    $breadcrumbs->push('createUser', action('Admin\UsersController@addUser'));
+Breadcrumbs::register('Agregar', function($breadcrumbs) {
+    $breadcrumbs->parent('Usuarios');
+    $breadcrumbs->push('Agregar', action('Admin\UsersController@addUser'));
 });
 
 Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
@@ -39,29 +39,29 @@ Breadcrumbs::register('Grados', function($breadcrumbs) {
     $breadcrumbs->push('Grados', action('Admin\GradesController@index'));
 });
 
-Breadcrumbs::register('Agregar', function($breadcrumbs) {
+Breadcrumbs::register('Agregar Grados', function($breadcrumbs) {
     $breadcrumbs->parent('Grados');
-    $breadcrumbs->push('Agregar', action('Admin\GradesController@addGrade'));
+    $breadcrumbs->push('Agregar Grados', action('Admin\GradesController@addGrade'));
 });
 
-Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
+Breadcrumbs::register('Eliminar Grados', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Grados');
-    $breadcrumbs->push('Eliminar', action('Admin\GradesController@remove',$uuid));
+    $breadcrumbs->push('Eliminar Grados', action('Admin\GradesController@remove',$uuid));
 });
 
-Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
+Breadcrumbs::register('Editar Grados', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Grados');
-    $breadcrumbs->push('Editar', action('Admin\GradesController@edit',$uuid));
+    $breadcrumbs->push('Editar Grados', action('Admin\GradesController@edit',$uuid));
 });
 
-Breadcrumbs::register('Editar', function($breadcrumbs) {
+Breadcrumbs::register('Editar Grados', function($breadcrumbs) {
     $breadcrumbs->parent('Grados');
-    $breadcrumbs->push('Editar', action('Admin\GradesController@update'));
+    $breadcrumbs->push('Editar Grados', action('Admin\GradesController@update'));
 });
 
-Breadcrumbs::register('Materias', function($breadcrumbs, $uuid) {
+Breadcrumbs::register('Grados - Materias', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Grados');
-    $breadcrumbs->push('Materias', action('Admin\GradesController@courses', $uuid));
+    $breadcrumbs->push('Grados - Materias', action('Admin\GradesController@courses', $uuid));
 });
 
 // ADMIN COURSES
@@ -71,24 +71,24 @@ Breadcrumbs::register('Materias', function ($breadcrumbs) {
     $breadcrumbs->push('Materias', action('Admin\CoursesController@index'));
 });
 
-Breadcrumbs::register('Agregar', function($breadcrumbs) {
+Breadcrumbs::register('Agregar Materias', function($breadcrumbs) {
     $breadcrumbs->parent('Materias');
-    $breadcrumbs->push('Agregar', action('Admin\CoursesController@add'));
+    $breadcrumbs->push('Agregar Materias', action('Admin\CoursesController@add'));
 });
 
 Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Materias');
-    $breadcrumbs->push('Eliminar', action('Admin\CoursesController@remove', $uuid));
+    $breadcrumbs->push('Eliminar Materias', action('Admin\CoursesController@remove', $uuid));
 });
 
-Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
+Breadcrumbs::register('Editar Materias', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Materias');
-    $breadcrumbs->push('Editar', action('Admin\CoursesController@edit', $uuid));
+    $breadcrumbs->push('Editar Materias', action('Admin\CoursesController@edit', $uuid));
 });
 
-Breadcrumbs::register('Editar', function($breadcrumbs) {
+Breadcrumbs::register('Editar Materias', function($breadcrumbs) {
     $breadcrumbs->parent('Materias');
-    $breadcrumbs->push('Editar', action('Admin\CoursesController@update'));
+    $breadcrumbs->push('Editar Materias', action('Admin\CoursesController@update'));
 });
 
 
