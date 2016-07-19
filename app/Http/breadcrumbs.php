@@ -91,6 +91,33 @@ Breadcrumbs::register('Editar', function($breadcrumbs) {
     $breadcrumbs->push('Editar', action('Admin\CoursesController@update'));
 });
 
+// ADMIN UNITS
+
+Breadcrumbs::register('Unidades', function ($breadcrumbs) {
+    $breadcrumbs->parent('Administración');
+    $breadcrumbs->push('Materias', action('Admin\UnitController@index'));
+});
+
+Breadcrumbs::register('Agregar', function($breadcrumbs) {
+    $breadcrumbs->parent('Materias');
+    $breadcrumbs->push('Agregar', action('Admin\UnitController@add'));
+});
+
+Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Materias');
+    $breadcrumbs->push('Eliminar', action('Admin\UnitController@remove', $uuid));
+});
+
+Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Materias');
+    $breadcrumbs->push('Editar', action('Admin\UnitController@edit', $uuid));
+});
+
+Breadcrumbs::register('Editar', function($breadcrumbs) {
+    $breadcrumbs->parent('Materias');
+    $breadcrumbs->push('Editar', action('Admin\UnitController@update'));
+});
+
 
 
 
