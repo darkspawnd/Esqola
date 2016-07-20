@@ -179,4 +179,38 @@ class GradesController extends AdminBaseController
 
     }
 
+    public function courseUpdate(Request $data) {
+
+        $requested_user = Auth::user();
+        if(Grade::where('uuid','=',$data['auth'])->exists()) {
+            try {
+                $updating_grade = Grade::where('uuid','=',$data['auth'])->get()->first();
+                $updating_grade->courses()->detach();
+                foreach ($data['courses'] as $key => $course) {
+                    $course = Course::where('uuid','=',$course)->get()->first();
+                    $updating_grade->courses()->attach($course->id);
+                }
+                $courses = Course::all();
+                //return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses]);
+            } catch(\Exception $e) {
+                Error::create([
+                    'user_id' => $requested_user->id,
+                    'error' => 'Failed to add courses to grade, grade not found.',
+                    'description' => 'Invalid operation, ' . $e,
+                    'type' => 2,
+                ]);
+                return View('admin.grades.courses');
+            }
+        } else {
+            Error::create([
+                'user_id' => $requested_user->id,
+                'error' => 'Failed to edit grade, grade not found.',
+                'description' => 'Grade not found, cannot add course to invalid grade.',
+                'type' => 2,
+            ]);
+            return View('admin.grades.courses');
+        }
+
+    }
+
 }
