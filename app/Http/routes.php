@@ -51,6 +51,16 @@ Route::get('/admin/courses/update/{uuid}', ['as'=>'Editar Materias','uses'=>'Adm
 Route::post('/admin/courses/add', ['as'=>'Agregar Materias', 'uses'=>'Admin\CoursesController@create']);
 Route::post('/admin/courses/update', ['as'=>'Editar Materias', 'uses'=>'Admin\CoursesController@update']);
 
+// ADMINISTRATION > GENERAL > UNITS
+Route::get('/admin/units',['as'=>'Unidades', 'uses'=>'Admin\UnitController@index']);
+Route::get('/admin/units/add',['as'=>'Agregar', 'uses'=>'Admin\UnitController@add']);
+Route::get('/admin/units/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\UnitController@remove']);
+Route::get('/admin/units/update/{uuid}', ['as'=>'Editar','uses'=>'Admin\UnitController@edit']);
+
+Route::post('/admin/units/add', ['as'=>'Agregar', 'uses'=>'Admin\UnitController@create']);
+Route::post('/admin/units/update', ['as'=>'Editar', 'uses'=>'Admin\UnitController@update']);
+
+
 //ADMINISTRATION > LOG
 Route::get('/admin/systemlog', ['as'=>'Log','uses'=>'Admin\SystemController@log']);
 Route::get('/admin/systemlog/{id}', ['as'=>'Descripción','uses'=>'Admin\SystemController@LogDescription']);

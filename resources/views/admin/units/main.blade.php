@@ -1,16 +1,16 @@
 @extends('layouts/__admin')
 @section('content')
     <div class="ui secondary pointing menu">
-        <a class=" item" href="{!! action('Admin\UsersController@mainUsers') !!}">
+        <a class="item" href="{!! action('Admin\UsersController@mainUsers') !!}">
             Usuarios
         </a>
         <a class="item" href="{!! action('Admin\GradesController@index') !!}">
             Grados
         </a>
-        <a class="active item" href="{!! action('Admin\CoursesController@index') !!}">
+        <a class="item" href="{!! action('Admin\CoursesController@index') !!}">
             Materias
         </a>
-        <a class="item" href="{!! action('Admin\UnitController@index') !!}">
+        <a class="active item" href="{!! action('Admin\UnitController@index') !!}">
             Unidades
         </a>
         <div class="right menu">
@@ -22,9 +22,9 @@
     <div class="ui segments ">
         <div class="ui menu attached right icon labeled aligned">
             <div class="ui header item borderless">
-                Materias
+                Unidades
             </div>
-            <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\CoursesController@add') !!}">
+            <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\UnitController@add') !!}">
                 <i class="icon add"></i>
                 Agregar
             </a>
@@ -33,14 +33,14 @@
             <table class="ui fixed table" id="users-table">
                 <thead>
                 <th class="collapsing">#</th>
-                <th>Materia</th>
+                <th>Units</th>
                 <th class="collapsing">Acciones</th>
                 </thead>
                 <tbody>
-                @foreach($courses as $key => $current_course)
+                @foreach($units as $key => $unit_current)
                     <tr>
                         <td> {{{ $key+1 }}} </td>
-                        <td> {{{ $current_course->name }}} </td>
+                        <td> {{{ $unit_current->name }}} </td>
                         <td>
                             <div class="ui floating labeled icon dropdown button">
                                 <i class="wizard icon"></i>
@@ -51,10 +51,10 @@
                                         Opciones
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="item" data-value="{!! action('Admin\CoursesController@edit',['uuid'=>$current_course->uuid]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\UnitController@edit',['uuid'=>$unit_current->uuid]) !!}">
                                         Editar
                                     </div>
-                                    <div class="item" data-value="{!! action('Admin\CoursesController@remove',['uuid'=>$current_course->uuid]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\UnitController@remove',['uuid'=>$unit_current->uuid]) !!}">
                                         Eliminar
                                     </div>
                                 </div>
