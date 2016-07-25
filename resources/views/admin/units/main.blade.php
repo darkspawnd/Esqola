@@ -40,8 +40,8 @@
                 @foreach($units as $key => $unit_current)
                     <tr>
                         <td> {{{ $key+1 }}} </td>
-                        <td> {{{ $unit_current->name }}} </td>
-                        <td>
+                        <td> {{{ $unit_current->common_name }}} </td>
+                        <td class="collapsing">
                             <div class="ui floating labeled icon dropdown button">
                                 <i class="wizard icon"></i>
                                 <span class="text">Acciones</span>
@@ -51,10 +51,10 @@
                                         Opciones
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="item" data-value="{!! action('Admin\UnitController@edit',['uuid'=>$unit_current->uuid]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\UnitController@edit',['id'=>$unit_current->id]) !!}">
                                         Editar
                                     </div>
-                                    <div class="item" data-value="{!! action('Admin\UnitController@remove',['uuid'=>$unit_current->uuid]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\UnitController@remove',['id'=>$unit_current->id]) !!}">
                                         Eliminar
                                     </div>
                                 </div>

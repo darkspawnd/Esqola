@@ -53,12 +53,12 @@ Route::post('/admin/courses/update', ['as'=>'Editar Materias', 'uses'=>'Admin\Co
 
 // ADMINISTRATION > GENERAL > UNITS
 Route::get('/admin/units',['as'=>'Unidades', 'uses'=>'Admin\UnitController@index']);
-Route::get('/admin/units/add',['as'=>'Agregar', 'uses'=>'Admin\UnitController@add']);
-Route::get('/admin/units/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\UnitController@remove']);
-Route::get('/admin/units/update/{uuid}', ['as'=>'Editar','uses'=>'Admin\UnitController@edit']);
+Route::get('/admin/units/add',['as'=>'Agregar Unidad', 'uses'=>'Admin\UnitController@add']);
+Route::get('/admin/units/remove/{uuid}', ['as'=>'Eliminar Unidad','uses'=>'Admin\UnitController@remove']);
+Route::get('/admin/units/update/{uuid}', ['as'=>'Editar Unidad','uses'=>'Admin\UnitController@edit']);
 
-Route::post('/admin/units/add', ['as'=>'Agregar', 'uses'=>'Admin\UnitController@create']);
-Route::post('/admin/units/update', ['as'=>'Editar', 'uses'=>'Admin\UnitController@update']);
+Route::post('/admin/units/add', ['as'=>'Agregar Unidad', 'uses'=>'Admin\UnitController@create']);
+Route::post('/admin/units/update', ['as'=>'Editar Unidad', 'uses'=>'Admin\UnitController@update']);
 
 // ADMINISTRATION > CONTENTS
 Route::get('/admin/contents',['as'=>'Contenidos', 'uses'=>'Admin\ContentsController@index']);

@@ -95,27 +95,27 @@ Breadcrumbs::register('Editar Materias', function($breadcrumbs) {
 
 Breadcrumbs::register('Unidades', function ($breadcrumbs) {
     $breadcrumbs->parent('Administración');
-    $breadcrumbs->push('Materias', action('Admin\UnitController@index'));
+    $breadcrumbs->push('Unidades', action('Admin\UnitController@index'));
 });
 
-Breadcrumbs::register('Agregar', function($breadcrumbs) {
-    $breadcrumbs->parent('Materias');
-    $breadcrumbs->push('Agregar', action('Admin\UnitController@add'));
+Breadcrumbs::register('Agregar Unidad', function($breadcrumbs) {
+    $breadcrumbs->parent('Unidades');
+    $breadcrumbs->push('Agregar Unidad', action('Admin\UnitController@add'));
 });
 
-Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
-    $breadcrumbs->parent('Materias');
-    $breadcrumbs->push('Eliminar', action('Admin\UnitController@remove', $uuid));
+Breadcrumbs::register('Eliminar Unidad', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Unidades');
+    $breadcrumbs->push('Eliminar Unidad', action('Admin\UnitController@remove', $uuid));
 });
 
-Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
-    $breadcrumbs->parent('Materias');
-    $breadcrumbs->push('Editar', action('Admin\UnitController@edit', $uuid));
+Breadcrumbs::register('Editar Unidad', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Unidades');
+    $breadcrumbs->push('Editar Unidad', action('Admin\UnitController@edit', $uuid));
 });
 
-Breadcrumbs::register('Editar', function($breadcrumbs) {
-    $breadcrumbs->parent('Materias');
-    $breadcrumbs->push('Editar', action('Admin\UnitController@update'));
+Breadcrumbs::register('Editar Unidad', function($breadcrumbs) {
+    $breadcrumbs->parent('Unidades');
+    $breadcrumbs->push('Editar Unidad', action('Admin\UnitController@update'));
 });
 
 
