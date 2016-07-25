@@ -1,7 +1,7 @@
 @extends('layouts/__admin')
 @section('content')
     <div class="ui text menu">
-        <a class="item" href="{!! action('Admin\UnitController@index') !!}">
+        <a class="item" href="{!! action('Admin\CoursesController@index') !!}">
             <button class="ui button basic active"><i class="icon angle left ui"></i> Regresar</button>
         </a>
         <div class="right menu">
@@ -23,11 +23,11 @@
                     <li>{{ $status->message }}</li>
                 </div>
             @endif
-            <form method="post" class="ui form error" role="form" action="{!! action('Admin\UnitController@create') !!}">
+            <form method="post" class="ui form error" role="form" action="{!! action('Admin\CoursesController@create') !!}">
                     {!! csrf_field() !!}
                 <div class="required field">
                     <label class="ui"> Unidad </label>
-                    <input type="text" name="unit" value="{{ old('unit') }}">
+                    <input type="text" name="Materia" value="{{ old('Materia') }}">
                 </div>
                 <div class="field align-to-right">
                     <button class="ui button orange active submit">

@@ -1,7 +1,7 @@
 @extends('layouts/__admin')
 @section('content')
     <div class="ui secondary pointing menu">
-        <a class="item" href="{!! action('Admin\UsersController@mainUsers') !!}">
+        <a class="item" href="{!! action('Admin\UsersController@index') !!}">
             Usuarios
         </a>
         <a class="item" href="{!! action('Admin\GradesController@index') !!}">
@@ -40,7 +40,7 @@
                 @foreach($units as $key => $unit_current)
                     <tr>
                         <td> {{{ $key+1 }}} </td>
-                        <td> {{{ $unit_current->common_name }}} </td>
+                        <td> {{{ $unit_current->name }}} </td>
                         <td>
                             <div class="ui floating labeled icon dropdown button">
                                 <i class="wizard icon"></i>
@@ -51,10 +51,10 @@
                                         Opciones
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="item" data-value="{!! action('Admin\UnitController@edit',['id'=>$unit_current->id]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\UnitController@edit',['uuid'=>$unit_current->uuid]) !!}">
                                         Editar
                                     </div>
-                                    <div class="item" data-value="{!! action('Admin\UnitController@remove',['id'=>$unit_current->id]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\UnitController@remove',['uuid'=>$unit_current->uuid]) !!}">
                                         Eliminar
                                     </div>
                                 </div>
