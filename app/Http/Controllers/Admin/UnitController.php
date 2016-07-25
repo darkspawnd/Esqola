@@ -4,38 +4,42 @@ namespace App\Http\Controllers\Admin;
 
 use App\errors as Error;
 use App\Grades as Grade;
+use App\Units as Unit;
 use App\Http\Requests;
+use App\User as User;
+use App\User_attribute as Attributes;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Spatie\Permission\Models\Permission as Permission;
+use Spatie\Permission\Models\Role as Roles;
 use Validation;
 use Webpatser\Uuid\Uuid as UUID;
-use App\Courses as Course;
 
-class GradesController extends AdminBaseController
+class UnitController extends AdminBaseController
 {
-
     public function __construct()
     {
         parent::__construct();
         $this->middleware('auth');
     }
-
+    public function index() {
+        $units = Unit::all();
+        return view('admin.units.main', ['units' => $units]);
+    }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     *
+     * @return mixed
      */
-
-    public function index() {
-        $grades = Grade::all();
-
-        return view('admin.grades.main', ['grades'=>$grades]);
+    public function add() {
+        return view('admin.units.add');
     }
 
-    public function addGrade() {
-        return view('admin.grades.add');
-    }
-
+    /**
+     * @param Request $data
+     * @return mixed
+     */
     public function create(Request $data) {
         $user = Auth::user();
         $message = [
@@ -44,47 +48,46 @@ class GradesController extends AdminBaseController
             'min' => 'El campo :attribute debe de cumplir con el número de caracteres.'
         ];
         $this->validate($data, [
-            'Grado' => 'required'
+            'unit' => 'required'
         ], $message);
 
         try{
-            if(!Grade::where('name','=',$data['Grado'])->exists()){
-                Grade::create([
-                    'name' => $data['Grado'],
-                    'uuid' => UUID::generate(4)
-                ]);
+            if(!Unit::where('common_name','=',$data['unit'])->exists()){
+                DB::table('units')->insert( array(
+                    'unit_number' => $data['unit'],
+                    'common_name' => $data['unit'])
+                );
+
                 $status = (object) array(
                     'created' => 'success',
-                    'message' => 'Grado creado satisfactoriamente..',
+                    'message' => 'Unidad creada satisfactoriamente..',
                 );
             } else {
                 $status = (object) array(
                     'created' => 'error',
-                    'message' => 'Error creando grado, grado ya existe.',
+                    'message' => 'Error creando Unidad, Unidad ya existe.',
                 );
             }
         } catch (\Exception $e) {
             Error::create([
                 'user_id' => $user->id,
-                'error' => 'Failed to create grade',
+                'error' => 'Failed to create course',
                 'description' => $e,
                 'type' => 2,
             ]);
             $status = (object) array(
                 'created' => 'error',
-                'message' => 'Error creando grado intente de nuevo.',
+                'message' => 'Error creando Unidad intente de nuevo.',
             );
         }
 
-        return view('admin.grades.add',['status'=>$status]);
-
+        return view('admin.units.add',['status'=>$status]);
     }
 
-
-    public function remove($uuid) {
+    public function remove($id) {
         $requested_user = Auth::user();
         try{
-            $grade = Grade::where('uuid','=',$uuid)->delete();
+            $units = Unit::where('id','=',$id)->delete();
         }Catch(\Exception $e){
             Error::create([
                 'user_id' => $requested_user->id,
@@ -94,15 +97,15 @@ class GradesController extends AdminBaseController
             ]);
         }
 
-        $grades = Grade::all();
-        return redirect()->action('Admin\GradesController@index', ['grades'=>$grades]);
+        $units = Unit::all();
+        return redirect()->action('Admin\UnitController@index', ['unit'=>$units ]);
     }
 
-    public function edit($uuid) {
+    public function edit($id) {
         $requested_user = Auth::user();
-        if(Grade::where('uuid','=',$uuid)->exists()) {
-            $updating_grade = Grade::where('uuid','=',$uuid)->get()->first();
-            return View('admin.grades.update', ['grade' => $updating_grade]);
+        if(Unit::where('id','=',$id)->exists()) {
+            $updating_unit = Unit::where('id','=',$id)->get()->first();
+            return View('admin.units.update', ['unit' => $updating_unit, 'units' => $updating_unit]);
         } else {
             Error::create([
                 'user_id' => $requested_user->id,
@@ -110,39 +113,47 @@ class GradesController extends AdminBaseController
                 'description' => 'Grade not found',
                 'type' => 2,
             ]);
-            return View('admin.grades.main');
+            return View('admin.units.main');
         }
     }
 
     public function update(Request $data) {
         $user = Auth::user();
+
         $message = [
             'required' => 'El campo :attribute es requerido.',
             'confirmed' => 'Las contraseñas no coinciden.',
             'min' => 'El campo :attribute debe de cumplir con el número de caracteres.'
         ];
         $this->validate($data, [
-            'Grado' => 'required',
+            'unit' => 'required',
         ], $message);
 
         try {
-            if(!Grade::where('uuid','=',$data['auth'])->exists()){
+            if(!Unit::where('id','=',$data['id'])->exists()){
                 $status = (object) array(
                     'created' => 'error',
-                    'message' => 'Error grado no existe.',
+                    'message' => 'Error Unidad no existe.',
                 );
-            }else{
-                $to_edit = Grade::where('uuid','=',$data['auth'])->get()->first();
-                $to_edit->name = $data['Grado'];
 
-                $to_edit->save();
+            }else{
+
+                DB::table('units')
+                    ->where('id', $data['id'])
+                    ->update(array('common_name' => $data['unit'], 'unit_number' => $data['unit'],));
+
+                //$to_edit = Unit::where('id','=',$data['id'])->get()->first();
+
+                //return $data['unit'];
+                //$to_edit->common_name = $data['unit'];
+                //$to_edit->save();
 
                 $status = (object) array(
                     'created' => 'success',
                     'message' => 'Grado actualizado satisfactoriamente.',
                 );
 
-                return view('admin.grades.update', ['status' => $status, 'grade'=>$to_edit]);
+                return view('admin.units.update', ['status' => $status, 'unit'=>$data]);
             }
         } catch(\Exception $e) {
             Error::create([
@@ -157,26 +168,7 @@ class GradesController extends AdminBaseController
             );
         }
 
-        return view('admin.grades.main', ['status' => $status]);
-    }
-
-    public function courses($uuid) {
-
-        $requested_user = Auth::user();
-        if(Grade::where('uuid','=',$uuid)->exists()) {
-            $updating_grade = Grade::where('uuid','=',$uuid)->get()->first();
-            $courses = Course::all();
-            return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses]);
-        } else {
-            Error::create([
-                'user_id' => $requested_user->id,
-                'error' => 'Failed to edit grade, grade not found.',
-                'description' => 'Grade not found, cannot add course to invalid grade.',
-                'type' => 2,
-            ]);
-            return View('admin.grades.courses');
-        }
-
+        return view('admin.units.main', ['status' => $status]);
     }
 
 }

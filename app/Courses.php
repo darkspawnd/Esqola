@@ -8,11 +8,4 @@ class Courses extends Model
 {
     protected $table = 'courses';
     protected $fillable = ['name','uuid'];
-
-    public function grade() {
-        $this->belongsToMany("App\Grade");
-    }
-
-
-
 }

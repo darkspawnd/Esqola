@@ -1,7 +1,7 @@
 @extends('layouts/__admin')
 @section('content')
     <div class="ui text menu">
-        <a class="item" href="{!! action('Admin\UsersController@index') !!}">
+        <a class="item" href="{!! action('Admin\UsersController@mainUsers') !!}">
             <button class="ui button basic active"><i class="icon angle left ui"></i> Regresar</button>
         </a>
         <div class="right menu">

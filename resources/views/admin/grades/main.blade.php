@@ -1,7 +1,7 @@
 @extends('layouts/__admin')
 @section('content')
     <div class="ui secondary pointing menu">
-        <a class=" item" href="{!! action('Admin\UsersController@index') !!}">
+        <a class=" item" href="{!! action('Admin\UsersController@mainUsers') !!}">
             Usuarios
         </a>
         <a class="active item" href="{!! action('Admin\GradesController@index') !!}">
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="divider"></div>
                                     <div class="item" data-value="{!! action('Admin\GradesController@courses',['uuid'=>$current_grade->uuid]) !!}">
-                                        Materias
+                                        Agregar materias
                                     </div>
                                     <div class="item" data-value="{!! action('Admin\GradesController@edit',['uuid'=>$current_grade->uuid]) !!}">
                                         Editar
