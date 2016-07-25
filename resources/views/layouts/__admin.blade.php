@@ -43,7 +43,7 @@
             <i class="icon dashboard"></i>
             Dashboard
         </a>
-        <a class="ui item orange users-home" href="{!! action('Admin\UsersController@mainUsers') !!}">
+        <a class="ui item orange users-home" href="{!! action('Admin\UsersController@index') !!}">
             <i class="icon university"></i>
             General
         </a>
@@ -55,7 +55,7 @@
             <i class="icon file"></i>
             Tareas
         </a>
-        <a class="ui item orange">
+        <a class="ui item orang contents-home" href="{!! action('Admin\ContentsController@index') !!}">
             <i class="icon content"></i>
             Contenidos
         </a>
