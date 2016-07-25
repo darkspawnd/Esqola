@@ -60,15 +60,6 @@ Route::get('/admin/units/update/{uuid}', ['as'=>'Editar','uses'=>'Admin\UnitCont
 Route::post('/admin/units/add', ['as'=>'Agregar', 'uses'=>'Admin\UnitController@create']);
 Route::post('/admin/units/update', ['as'=>'Editar', 'uses'=>'Admin\UnitController@update']);
 
-// ADMINISTRATION > GENERAL > EVENTS
-Route::get('/admin/events',['as'=>'Eventos', 'uses'=>'Admin\EventsController@index']);
-Route::get('/admin/events/add',['as'=>'Agregar', 'uses'=>'Admin\EventsController@add']);
-Route::get('/admin/events/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\EventsController@remove']);
-Route::get('/admin/events/update/{uuid}', ['as'=>'Editar','uses'=>'Admin\EventsController@edit']);
-
-Route::post('/admin/events/add', ['as'=>'Agregar', 'uses'=>'Admin\EventsController@create']);
-Route::post('/admin/events/update', ['as'=>'Editar', 'uses'=>'Admin\EventsController@update']);
-
 
 //ADMINISTRATION > LOG
 Route::get('/admin/systemlog', ['as'=>'Log','uses'=>'Admin\SystemController@log']);

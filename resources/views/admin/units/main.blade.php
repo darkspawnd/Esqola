@@ -1,7 +1,7 @@
 @extends('layouts/__admin')
 @section('content')
     <div class="ui secondary pointing menu">
-        <a class="item" href="{!! action('Admin\UsersController@mainUsers') !!}">
+        <a class="item" href="{!! action('Admin\UsersController@index') !!}">
             Usuarios
         </a>
         <a class="item" href="{!! action('Admin\GradesController@index') !!}">

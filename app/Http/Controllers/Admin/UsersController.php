@@ -31,7 +31,7 @@ class UsersController extends AdminBaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function mainUsers() {
+    public function index() {
         $user = Auth::user();
         $usersList = User::all();
 
@@ -158,7 +158,7 @@ class UsersController extends AdminBaseController
             ]);
         }
 
-        return redirect()->action('Admin\UsersController@mainUsers');
+        return redirect()->action('Admin\UsersController@index');
     }
 
     /**
@@ -180,7 +180,7 @@ class UsersController extends AdminBaseController
                 'description' => 'User not found',
                 'type' => 2,
             ]);
-            return redirect()->action('Admin\UsersController@mainUsers');
+            return redirect()->action('Admin\UsersController@index');
         }
     }
 
