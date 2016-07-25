@@ -23,7 +23,7 @@ Route::get('logout','HomeController@logout');
 Route::get('/admin', ['as'=>'Administración','uses'=>'Admin\DashboardController@index']);
 
 //ADMINISTRATION > GENERAL > USERS
-Route::get('/admin/users', ['as'=>'Usuarios','uses'=>'Admin\UsersController@mainUsers']);
+Route::get('/admin/users', ['as'=>'Usuarios','uses'=>'Admin\UsersController@index']);
 Route::get('/admin/users/add', ['as'=>'Agregar','uses'=>'Admin\UsersController@addUser']);
 Route::get('/admin/users/update/{uuid}',['as'=>'Editar','uses'=>'Admin\UsersController@editUser']);
 Route::get('/admin/users/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\UsersController@removeUser']);
@@ -60,6 +60,11 @@ Route::get('/admin/units/update/{uuid}', ['as'=>'Editar','uses'=>'Admin\UnitCont
 Route::post('/admin/units/add', ['as'=>'Agregar', 'uses'=>'Admin\UnitController@create']);
 Route::post('/admin/units/update', ['as'=>'Editar', 'uses'=>'Admin\UnitController@update']);
 
+// ADMINISTRATION > CONTENTS
+Route::get('/admin/contents',['as'=>'Contenidos', 'uses'=>'Admin\ContentsController@index']);
+Route::get('/admin/contents/add',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@add']);
+
+Route::post('/admin/contents/create',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@create']);
 
 //ADMINISTRATION > LOG
 Route::get('/admin/systemlog', ['as'=>'Log','uses'=>'Admin\SystemController@log']);

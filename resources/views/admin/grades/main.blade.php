@@ -10,9 +10,6 @@
         <a class="item" href="{!! action('Admin\CoursesController@index') !!}">
             Materias
         </a>
-        <a class="item" href="{!! action('Admin\UnitController@index') !!}">
-            Unidades
-        </a>
         <div class="right menu">
             <div class="item">
                 <h5 class="ui header"> {!! Breadcrumbs::renderIfExists() !!}</h5>

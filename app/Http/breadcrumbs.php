@@ -1,7 +1,7 @@
 <?php
 
 
-// ADMIN - USERS
+// ADMIN GENERAL USERS
 
 Breadcrumbs::register('Administración', function($breadcrumbs) {
     $breadcrumbs->push('Administración', action('Admin\DashboardController@index'));
@@ -9,7 +9,7 @@ Breadcrumbs::register('Administración', function($breadcrumbs) {
 
 Breadcrumbs::register('Usuarios', function($breadcrumbs) {
     $breadcrumbs->parent('Administración');
-    $breadcrumbs->push('Usuarios', action('Admin\UsersController@mainUsers'));
+    $breadcrumbs->push('Usuarios', action('Admin\UsersController@index'));
 });
 
 Breadcrumbs::register('Agregar', function($breadcrumbs) {
@@ -32,7 +32,7 @@ Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
     $breadcrumbs->push('Eliminar', action('Admin\UsersController@removeUser',$uuid));
 });
 
-// ADMIN - GRADES
+// ADMIN GENERAL GRADES
 
 Breadcrumbs::register('Grados', function($breadcrumbs) {
     $breadcrumbs->parent('Administración');
@@ -64,7 +64,7 @@ Breadcrumbs::register('Grados - Materias', function($breadcrumbs, $uuid) {
     $breadcrumbs->push('Grados - Materias', action('Admin\GradesController@courses', $uuid));
 });
 
-// ADMIN COURSES
+// ADMIN GENERAL COURSES
 
 Breadcrumbs::register('Materias', function ($breadcrumbs) {
     $breadcrumbs->parent('Administración');
@@ -91,7 +91,7 @@ Breadcrumbs::register('Editar Materias', function($breadcrumbs) {
     $breadcrumbs->push('Editar Materias', action('Admin\CoursesController@update'));
 });
 
-// ADMIN UNITS
+// ADMIN GENERAL UNITS
 
 Breadcrumbs::register('Unidades', function ($breadcrumbs) {
     $breadcrumbs->parent('Administración');
@@ -120,12 +120,24 @@ Breadcrumbs::register('Editar', function($breadcrumbs) {
 
 
 
+// ADMIN CONTENTS
 
+Breadcrumbs::register('Contenidos', function($breadcrumbs) {
+    $breadcrumbs->parent('Administración');
+    $breadcrumbs->push('Contenidos', action('Admin\ContentsController@index'));
+});
 
+Breadcrumbs::register('Agregar Contenido', function($breadcrumbs) {
+    $breadcrumbs->parent('Contenidos');
+    $breadcrumbs->push('Agregar Contenido', action('Admin\ContentsController@add'));
+});
 
+Breadcrumbs::register('Agregar Contenido', function($breadcrumbs) {
+    $breadcrumbs->parent('Contenidos');
+    $breadcrumbs->push('Agregar Contenido', action('Admin\ContentsController@create'));
+});
 
 // ADMIN LOG
-
 
 Breadcrumbs::register('Log', function($breadcrumbs) {
     $breadcrumbs->parent('Administración');
