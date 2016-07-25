@@ -14,7 +14,7 @@ class Grades extends Model
     }
 
     public function courses(){
-        return $this->belongsToMany('App\Co urses', 'rltn_grade_course','grade_id', 'course_id');
+        return $this->belongsToMany('App\Courses', 'rltn_grade_course','grade_id', 'course_id');
     }
 
 }

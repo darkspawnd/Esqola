@@ -33,4 +33,9 @@ $(function () {
         $('.main-content').css('width',mainContentSize);
     }
 
+    $('.orange').each(function () {
+        $(this).removeClass('orange');
+        $(this).addClass('teal');
+    });
+
 });

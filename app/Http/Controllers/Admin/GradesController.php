@@ -191,7 +191,7 @@ class GradesController extends AdminBaseController
                     $updating_grade->courses()->attach($course->id);
                 }
                 $courses = Course::all();
-                //return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses]);
+                return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses]);
             } catch(\Exception $e) {
                 Error::create([
                     'user_id' => $requested_user->id,
