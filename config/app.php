@@ -159,7 +159,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        App\Providers\HelperServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
