@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\errors as Error;
 use App\Grades as Grade;
-use App\Units as Unit;
+use App\Events as Event;
 use App\Http\Requests;
 use App\User as User;
 use App\User_attribute as Attributes;
@@ -17,7 +16,8 @@ use Spatie\Permission\Models\Role as Roles;
 use Validation;
 use Webpatser\Uuid\Uuid as UUID;
 
-class UnitController extends AdminBaseController
+
+class EventsController extends AdminBaseController
 {
     public function __construct()
     {
@@ -25,21 +25,17 @@ class UnitController extends AdminBaseController
         $this->middleware('auth');
     }
     public function index() {
-        $units = Unit::all();
-        return view('admin.units.main', ['units' => $units]);
+        $events = Event::all();
+        return view('admin.events.main', ['events' => $events]);
     }
 
     /**
      * @return mixed
      */
     public function add() {
-        return view('admin.units.add');
+        return view('admin.events.add');
     }
 
-    /**
-     * @param Request $data
-     * @return mixed
-     */
     public function create(Request $data) {
         $user = Auth::user();
         $message = [
@@ -48,72 +44,78 @@ class UnitController extends AdminBaseController
             'min' => 'El campo :attribute debe de cumplir con el número de caracteres.'
         ];
         $this->validate($data, [
-            'unit' => 'required'
+            'event' => 'required'
         ], $message);
 
         try{
-            if(!Unit::where('common_name','=',$data['unit'])->exists()){
-                DB::table('units')->insert( array(
-                    'unit_number' => $data['unit'],
-                    'common_name' => $data['unit'])
-                );
+            if(!Event::where('title','=',$data['event'])->exists()){
+
+                Event::create([
+                    'title' => $data['event'],
+                    'media' => $data['event']
+                ]);
+
+                //DB::table('events')->insert( array(
+                //        'title' => $data['event'],
+                //        'media' => $data['event'])
+                //);
 
                 $status = (object) array(
                     'created' => 'success',
-                    'message' => 'Unidad creada satisfactoriamente..',
+                    'message' => 'Evento creada satisfactoriamente..',
                 );
             } else {
                 $status = (object) array(
                     'created' => 'error',
-                    'message' => 'Error creando Unidad, Unidad ya existe.',
+                    'message' => 'Error creando Evento, Evento ya existe.',
                 );
             }
         } catch (\Exception $e) {
             Error::create([
                 'user_id' => $user->id,
-                'error' => 'Failed to create Unit',
+                'error' => 'Failed to create Event',
                 'description' => $e,
                 'type' => 2,
             ]);
             $status = (object) array(
                 'created' => 'error',
-                'message' => 'Error creando Unidad intente de nuevo.',
+                'message' => 'Error creando Evento intente de nuevo.',
             );
         }
 
-        return view('admin.units.add',['status'=>$status]);
+        return view('admin.events.add',['status'=>$status]);
     }
 
     public function remove($id) {
         $requested_user = Auth::user();
         try{
-            $units = Unit::where('id','=',$id)->delete();
+            $events = Event::where('id','=',$id)->delete();
         }Catch(\Exception $e){
             Error::create([
                 'user_id' => $requested_user->id,
-                'error' => 'Failed to remove unit.',
+                'error' => 'Failed to remove event.',
                 'description' => $e,
                 'type' => 2,
             ]);
         }
 
-        $units = Unit::all();
-        return redirect()->action('Admin\UnitController@index', ['unit'=>$units ]);
+        $events = Event::all();
+        return redirect()->action('Admin\EventsController@index', ['event'=>$events ]);
     }
 
     public function edit($id) {
         $requested_user = Auth::user();
-        if(Unit::where('id','=',$id)->exists()) {
-            $updating_unit = Unit::where('id','=',$id)->get()->first();
-            return View('admin.units.update', ['unit' => $updating_unit, 'units' => $updating_unit]);
+        if(Event::where('id','=',$id)->exists()) {
+            $updating_unit = Event::where('id','=',$id)->get()->first();
+            return View('admin.events.update', ['event' => $updating_unit, 'event' => $updating_unit]);
         } else {
             Error::create([
                 'user_id' => $requested_user->id,
-                'error' => 'Failed to edit grade, grade not found.',
-                'description' => 'Grade not found',
+                'error' => 'Failed to edit event, event not found.',
+                'description' => 'Event not found',
                 'type' => 2,
             ]);
-            return View('admin.units.main');
+            return View('admin.events.main');
         }
     }
 
@@ -126,21 +128,21 @@ class UnitController extends AdminBaseController
             'min' => 'El campo :attribute debe de cumplir con el número de caracteres.'
         ];
         $this->validate($data, [
-            'unit' => 'required',
+            'event' => 'required',
         ], $message);
 
         try {
-            if(!Unit::where('id','=',$data['id'])->exists()){
+            if(!Event::where('id','=',$data['id'])->exists()){
                 $status = (object) array(
                     'created' => 'error',
-                    'message' => 'Error Unidad no existe.',
+                    'message' => 'Error Evento no existe.',
                 );
 
             }else{
 
-                DB::table('units')
+                DB::table('events')
                     ->where('id', $data['id'])
-                    ->update(array('common_name' => $data['unit'], 'unit_number' => $data['unit'],));
+                    ->update(array('title' => $data['event'], 'media' => $data['event'],));
 
                 //$to_edit = Unit::where('id','=',$data['id'])->get()->first();
 
@@ -150,25 +152,24 @@ class UnitController extends AdminBaseController
 
                 $status = (object) array(
                     'created' => 'success',
-                    'message' => 'Grado actualizado satisfactoriamente.',
+                    'message' => 'Evento actualizado satisfactoriamente.',
                 );
 
-                return view('admin.units.update', ['status' => $status, 'unit'=>$data]);
+                return view('admin.events.update', ['status' => $status, 'event'=>$data]);
             }
         } catch(\Exception $e) {
             Error::create([
                 'user_id' => $user->id,
-                'error' => 'Failed to update unit',
+                'error' => 'Failed to update event',
                 'description' => $e,
                 'type' => 2,
             ]);
             $status = (object) array(
                 'created' => 'error',
-                'message' => 'Error al editar unidad intente de nuevo.',
+                'message' => 'Error al editar evento intente de nuevo.',
             );
         }
 
-        return view('admin.units.main', ['status' => $status]);
+        return view('admin.events.main', ['status' => $status]);
     }
-
 }

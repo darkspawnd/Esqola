@@ -59,7 +59,7 @@
             <i class="icon content"></i>
             Contenidos
         </a>
-        <a class="ui item orange">
+        <a class="ui item orang events-home" href="{!! action('Admin\EventsController@index')!!}">
             <i class="icon calendar"></i>
             Eventos
         </a>

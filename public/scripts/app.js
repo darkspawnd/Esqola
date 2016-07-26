@@ -34,8 +34,8 @@ $(function () {
     }
 
     $('.orange').each(function () {
-        $(this).removeClass('orange');
-        $(this).addClass('teal');
+        $(this).removeClass('blue');
+        $(this).addClass('blue');
     });
 
 });

@@ -118,6 +118,33 @@ Breadcrumbs::register('Editar Unidad', function($breadcrumbs) {
     $breadcrumbs->push('Editar Unidad', action('Admin\UnitController@update'));
 });
 
+// ADMIN GENERAL EVENTS
+
+Breadcrumbs::register('Events', function ($breadcrumbs) {
+    $breadcrumbs->parent('Administración');
+    $breadcrumbs->push('Eventos', action('Admin\EventsController@index'));
+});
+
+Breadcrumbs::register('Agregar Evento', function($breadcrumbs) {
+    $breadcrumbs->parent('Events');
+    $breadcrumbs->push('Agregar Evento', action('Admin\EventsController@add'));
+});
+
+Breadcrumbs::register('Eliminar Evento', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Events');
+    $breadcrumbs->push('Eliminar Evento', action('Admin\EventsController@remove', $uuid));
+});
+
+Breadcrumbs::register('Editar Evento', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Events');
+    $breadcrumbs->push('Editar Evento', action('Admin\EventsController@edit', $uuid));
+});
+
+Breadcrumbs::register('Editar Evento', function($breadcrumbs) {
+    $breadcrumbs->parent('Events');
+    $breadcrumbs->push('Editar Evento', action('Admin\EventsController@update'));
+});
+
 
 
 // ADMIN CONTENTS

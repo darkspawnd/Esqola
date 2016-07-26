@@ -60,6 +60,15 @@ Route::get('/admin/units/update/{uuid}', ['as'=>'Editar Unidad','uses'=>'Admin\U
 Route::post('/admin/units/add', ['as'=>'Agregar Unidad', 'uses'=>'Admin\UnitController@create']);
 Route::post('/admin/units/update', ['as'=>'Editar Unidad', 'uses'=>'Admin\UnitController@update']);
 
+// ADMINISTRATION > GENERAL > EVENTS
+Route::get('/admin/events',['as'=>'Events', 'uses'=>'Admin\EventsController@index']);
+Route::get('/admin/events/add',['as'=>'Agregar Evento', 'uses'=>'Admin\EventsController@add']);
+Route::get('/admin/events/remove/{uuid}', ['as'=>'Eliminar Evento','uses'=>'Admin\EventsController@remove']);
+Route::get('/admin/events/update/{uuid}', ['as'=>'Editar Evento','uses'=>'Admin\EventsController@edit']);
+
+Route::post('/admin/events/add', ['as'=>'Agregar Evento', 'uses'=>'Admin\EventsController@create']);
+Route::post('/admin/events/update', ['as'=>'Editar Evento', 'uses'=>'Admin\EventsController@update']);
+
 // ADMINISTRATION > CONTENTS
 Route::get('/admin/contents',['as'=>'Contenidos', 'uses'=>'Admin\ContentsController@index']);
 Route::get('/admin/contents/add',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@add']);
