@@ -12,19 +12,20 @@ Breadcrumbs::register('Usuarios', function($breadcrumbs) {
     $breadcrumbs->push('Usuarios', action('Admin\UsersController@index'));
 });
 
-Breadcrumbs::register('Agregar', function($breadcrumbs) {
-    $breadcrumbs->parent('Usuarios');
-    $breadcrumbs->push('Agregar', action('Admin\UsersController@addUser'));
-});
 
 Breadcrumbs::register('Agregar', function($breadcrumbs) {
     $breadcrumbs->parent('Usuarios');
     $breadcrumbs->push('Agregar', action('Admin\UsersController@addUser'));
 });
 
-Breadcrumbs::register('Editar', function($breadcrumbs, $uuid) {
+Breadcrumbs::register('Editar Usuarios', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Usuarios');
-    $breadcrumbs->push('Editar', action('Admin\UsersController@editUser',$uuid));
+    $breadcrumbs->push('Editar Usuarios', action('Admin\UsersController@editUser',$uuid));
+});
+
+Breadcrumbs::register('Editar Usuarios', function($breadcrumbs) {
+    $breadcrumbs->parent('Usuarios');
+    $breadcrumbs->push('Editar Usuarios', action('Admin\UsersController@updateUser'));
 });
 
 Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
@@ -76,7 +77,7 @@ Breadcrumbs::register('Agregar Materias', function($breadcrumbs) {
     $breadcrumbs->push('Agregar Materias', action('Admin\CoursesController@add'));
 });
 
-Breadcrumbs::register('Eliminar', function($breadcrumbs, $uuid) {
+Breadcrumbs::register('Eliminar Materias', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Materias');
     $breadcrumbs->push('Eliminar Materias', action('Admin\CoursesController@remove', $uuid));
 });
@@ -145,7 +146,32 @@ Breadcrumbs::register('Editar Evento', function($breadcrumbs) {
     $breadcrumbs->push('Editar Evento', action('Admin\EventsController@update'));
 });
 
+// ADMIN GENERAL HOMEWORKS
 
+Breadcrumbs::register('Tareas', function ($breadcrumbs) {
+    $breadcrumbs->parent('Administración');
+    $breadcrumbs->push('Tareas', action('Admin\HomeworksController@index'));
+});
+
+Breadcrumbs::register('Agregar Tarea', function($breadcrumbs) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Agregar Tarea', action('Admin\HomeworksController@add'));
+});
+
+Breadcrumbs::register('Eliminar Tarea', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Eliminar Tarea', action('Admin\HomeworksController@remove', $uuid));
+});
+
+Breadcrumbs::register('Editar Tarea', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Editar Tarea', action('Admin\HomeworksController@edit', $uuid));
+});
+
+Breadcrumbs::register('Editar Tarea', function($breadcrumbs) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Editar Tarea', action('Admin\HomeworksController@update'));
+});
 
 // ADMIN CONTENTS
 

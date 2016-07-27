@@ -220,7 +220,7 @@ class UsersController extends AdminBaseController
             if ($data['role'] == "Estudiante"){
                     $rowGrade = Grade::where('name','=',$data['gradeStudent'])->first();
                     $relation->usgra()->detach();
-                    $relation->usgra()->attach($to_edit->id);
+                    $relation->usgra()->attach($rowGrade->id);
             }
             if ($data['role'] == "Maestro"){
                 $relation->usgra()->detach();

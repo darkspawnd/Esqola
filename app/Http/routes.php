@@ -25,7 +25,7 @@ Route::get('/admin', ['as'=>'Administración','uses'=>'Admin\DashboardController
 //ADMINISTRATION > GENERAL > USERS
 Route::get('/admin/users', ['as'=>'Usuarios','uses'=>'Admin\UsersController@index']);
 Route::get('/admin/users/add', ['as'=>'Agregar','uses'=>'Admin\UsersController@addUser']);
-Route::get('/admin/users/update/{uuid}',['as'=>'Editar','uses'=>'Admin\UsersController@editUser']);
+Route::get('/admin/users/update/{uuid}',['as'=>'Editar Usuarios','uses'=>'Admin\UsersController@editUser']);
 Route::get('/admin/users/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\UsersController@removeUser']);
 
 Route::post('/admin/users/add', ['as'=>'Agregar', 'uses'=>'Admin\UsersController@createUser']);
@@ -68,6 +68,16 @@ Route::get('/admin/events/update/{uuid}', ['as'=>'Editar Evento','uses'=>'Admin\
 
 Route::post('/admin/events/add', ['as'=>'Agregar Evento', 'uses'=>'Admin\EventsController@create']);
 Route::post('/admin/events/update', ['as'=>'Editar Evento', 'uses'=>'Admin\EventsController@update']);
+
+// ADMINISTRATION > GENERAL > HOMEWORKS
+Route::get('/admin/homeworks',['as'=>'Tareas', 'uses'=>'Admin\HomeworksController@index']);
+Route::get('/admin/homeworks/add',['as'=>'Agregar Tarea', 'uses'=>'Admin\HomeworksController@add']);
+Route::post('/admin/homeworks/getadd',['as'=>'Agregar Tarea', 'uses'=>'Admin\HomeworksController@getAdd']);
+Route::get('/admin/homeworks/remove/{uuid}', ['as'=>'Eliminar Tarea','uses'=>'Admin\HomeworksController@remove']);
+Route::get('/admin/homeworks/update/{uuid}', ['as'=>'Editar Tarea','uses'=>'Admin\HomeworksController@edit']);
+
+Route::post('/admin/homeworks/add', ['as'=>'Agregar Tarea', 'uses'=>'Admin\HomeworksController@create']);
+Route::post('/admin/homeworks/update', ['as'=>'Editar Tarea', 'uses'=>'Admin\HomeworksController@update']);
 
 // ADMINISTRATION > CONTENTS
 Route::get('/admin/contents',['as'=>'Contenidos', 'uses'=>'Admin\ContentsController@index']);

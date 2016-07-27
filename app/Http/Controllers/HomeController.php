@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Auth;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -25,12 +26,16 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if($user->hasRole('admin'))
+        if($user->hasRole('admin')) {
             return redirect()->action('Admin\DashboardController@index');
-        if($user->hasRole('teacher'))
-            return redirect()->action('teacherController@dashboard');
-        if($user->hasRole('student'))
+        }
+        if($user->hasRole('Maestro')) {
+            var_dump($user->courses());
+            //return redirect()->action('teacherController@dashboard');
+        }
+        if($user->hasRole('Estudiante')) {
             return redirect()->action('student@dashboard');
+        }
     }
     public function logout(){
         Auth::logout();

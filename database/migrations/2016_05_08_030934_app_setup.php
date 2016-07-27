@@ -80,6 +80,7 @@ class AppSetup extends Migration
             $table->string('title',255);
             $table->text('description');
             $table->string('file_path');
+            $table->timestamps();
         });
 
         Schema::create('units', function(Blueprint $table) {

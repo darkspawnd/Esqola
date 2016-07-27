@@ -166,7 +166,12 @@ class GradesController extends AdminBaseController
         if(Grade::where('uuid','=',$uuid)->exists()) {
             $updating_grade = Grade::where('uuid','=',$uuid)->get()->first();
             $courses = Course::all();
-            return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses]);
+            $selectedCourses = $updating_grade->courses()->get();
+            $selectedUUID = array();
+            foreach ($selectedCourses as $currentSelectedCourse) {
+                array_push($selectedUUID, $currentSelectedCourse->uuid);
+            }
+            return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses, 'selectedCourses'=>$selectedUUID]);
         } else {
             Error::create([
                 'user_id' => $requested_user->id,
@@ -191,7 +196,16 @@ class GradesController extends AdminBaseController
                     $updating_grade->courses()->attach($course->id);
                 }
                 $courses = Course::all();
-                return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses]);
+                $selectedCourses = $updating_grade->courses()->get();
+                $status = (object) array(
+                    'created' => 'success',
+                    'message' => 'Materias actualizadas satisfactoriamente.',
+                );
+                $selectedUUID = array();
+                foreach ($selectedCourses as $currentSelectedCourse) {
+                    array_push($selectedUUID, $currentSelectedCourse->uuid);
+                }
+                return View('admin.grades.courses', ['grade' => $updating_grade, 'courses'=>$courses, 'selectedCourses'=>$selectedUUID, 'status' => $status]);
             } catch(\Exception $e) {
                 Error::create([
                     'user_id' => $requested_user->id,

@@ -133,7 +133,7 @@ class UnitController extends AdminBaseController
             if(!Unit::where('id','=',$data['id'])->exists()){
                 $status = (object) array(
                     'created' => 'error',
-                    'message' => 'Error Unidad no existe.',
+                    'message' => 'Error unidad no existe.',
                 );
 
             }else{
@@ -150,10 +150,12 @@ class UnitController extends AdminBaseController
 
                 $status = (object) array(
                     'created' => 'success',
-                    'message' => 'Grado actualizado satisfactoriamente.',
+                    'message' => 'Unidad actualizada satisfactoriamente.',
                 );
 
-                return view('admin.units.update', ['status' => $status, 'unit'=>$data]);
+                $unit = Unit::where('id','=',$data['id'])->get()->first();
+
+                return view('admin.units.update', ['status' => $status, 'unit'=>$unit]);
             }
         } catch(\Exception $e) {
             Error::create([

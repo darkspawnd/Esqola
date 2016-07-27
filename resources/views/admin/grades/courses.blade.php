@@ -29,7 +29,7 @@
                 @foreach($courses as $key => $course)
                     <div class="field responsive-check-grid">
                         <div class="ui checkbox">
-                            <input type="checkbox" name="courses[]" value="{{{ $course->uuid }}}" id="course-{{{ $key }}}">
+                            <input type="checkbox" name="courses[]" {{ (in_array($course->uuid, $selectedCourses)) ? 'checked' : ''  }} value="{{{ $course->uuid }}}" id="course-{{{ $key }}}">
                             <label for="course-{{{ $key }}}"> {{{ $course->name }}} </label>
                         </div>
                     </div>

@@ -1,8 +1,8 @@
-@extends('layouts/__admin')
+@extends('layouts.__admin')
 @section('content')
     <div class="ui secondary pointing menu">
-        <a class="active item" href="{!! action('Admin\EventsController@index') !!}">
-            Eventos
+        <a class="active item" href="{!! action('Admin\HomeworksController@index') !!}">
+            Tareas
         </a>
         <div class="right menu">
             <div class="item">
@@ -13,9 +13,9 @@
     <div class="ui segments ">
         <div class="ui menu attached right icon labeled aligned">
             <div class="ui header item borderless">
-                Eventos
+                Tareas
             </div>
-            <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\EventsController@add') !!}">
+            <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\HomeworksController@add') !!}">
                 <i class="icon add"></i>
                 Agregar
             </a>
@@ -24,14 +24,14 @@
             <table class="ui fixed table" id="users-table">
                 <thead>
                 <th class="collapsing">#</th>
-                <th>Events</th>
+                <th>Tareas</th>
                 <th class="collapsing">Acciones</th>
                 </thead>
                 <tbody>
-                @foreach($events as $key => $event_current)
+                @foreach($homeworks as $key => $homework_current)
                     <tr>
                         <td> {{{ $key+1 }}} </td>
-                        <td> {{{ $event_current->title }}} </td>
+                        <td> {{{ $homework_current->title }}} </td>
                         <td class="collapsing">
                             <div class="ui floating labeled icon dropdown button">
                                 <i class="wizard icon"></i>
@@ -42,10 +42,10 @@
                                         Opciones
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="item" data-value="{!! action('Admin\EventsController@edit',['id'=>$event_current->id]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\HomeworksController@edit',['id'=>$homework_current->id]) !!}">
                                         Editar
                                     </div>
-                                    <div class="item" data-value="{!! action('Admin\EventsController@remove',['id'=>$event_current->id]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\HomeworksController@remove',['id'=>$homework_current->id]) !!}">
                                         Eliminar
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
         </div>
     </div>
     <script type="application/javascript">
-        $('.events-home').addClass('active');
+        $('.homeworks-home').addClass('active');
         $('.ui.dropdown').dropdown({
             onChange: function (value, text) {
                 if(text === 'Eliminar') {

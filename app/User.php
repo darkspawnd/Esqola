@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use DB;
 
 class User extends Authenticatable
 {
@@ -14,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'bk','name', 'lastname','telephone','age', 'email', 'password', 'address','firstaccess', 'uuid'
+        'bk','name', 'lastname','telephone','age', 'email', 'password', 'address','firstaccess', 'uuid', 'id'
     ];
 
     /**
@@ -51,6 +52,22 @@ class User extends Authenticatable
 
     public function error() {
         return $this->hasOne('App\errors');
+    }
+
+    public function courses() {
+        $courses = DB::select(' SELECT courses.name, rltn_grade_course.course_id, COUNT(*) AS cantidad FROM app_esqola.courses	
+                                INNER JOIN app_esqola.rltn_grade_course
+                                ON courses.id = rltn_grade_course.course_id
+                                WHERE grade_id IN (
+                                SELECT grades.id FROM app_esqola.users
+                                INNER JOIN app_esqola.rltn_user_grade
+                                ON app_esqola.users.id = app_esqola.rltn_user_grade.user_id
+                                INNER JOIN app_esqola.grades 
+                                ON app_esqola.rltn_user_grade.grade_id = app_esqola.grades.id
+                                WHERE users.id = :id)
+                                GROUP BY rltn_grade_course.course_id', ['id'=>$this->id]);
+        return $courses;
+
     }
 
 }

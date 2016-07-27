@@ -23,19 +23,46 @@
                     <li>{{ $status->message }}</li>
                 </div>
             @endif
-            <form method="post" class="ui form error" role="form" action="{!! action('Admin\ContentsController@create') !!}">
+            <form method="post" class="ui form error" role="form" action="{!! action('Admin\ContentsController@create') !!}" enctype="multipart/form-data">
                 {!! csrf_field() !!}
                 <div class="required field">
                     <label class="ui"> Título </label>
                     <input type="text" name="title" value="{{ old('title') }}">
                 </div>
-                <div class="required field">
+                <div class="field">
                     <label class="ui"> Descripción </label>
                     <input type="text" name="description" value="{{ old('description') }}">
                 </div>
                 <div class="required field">
+                    <label class="ui"> Grado </label>
+                    <select name="grade" class="ui search fluid dropdown">
+                        <option value=""> Grado </option>
+                        @foreach($grades as $grade)
+                            <option value="{{{ $grade->uuid }}}"> {{{ $grade->name }}} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="required field">
+                    <label class="ui"> Materia </label>
+                    <select name="course" class="ui search fluid dropdown">
+                        <option value=""> Materia </option>
+                        @foreach($courses as $course)
+                            <option value="{{{ $course->uuid }}}"> {{{ $course->name }}} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="required field">
+                    <label class="ui"> Unidad </label>
+                    <select name="unit" class="ui search fluid dropdown">
+                        <option value=""> Unidad </option>
+                        @foreach($units as $unit)
+                            <option value="{{{ $unit->id }}}"> {{{ $unit->common_name }}} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="field">
                     <label class="ui"> Archivo </label>
-                    <input type="file" name="file" value="{{ old('file') }}">
+                    <input type="file" name="attachment" value="{{ old('file') }}">
                 </div>
                 <div class="field align-to-right">
                     <button class="ui button orange active submit">
@@ -46,6 +73,11 @@
         </div>
     </div>
     <script type="application/javascript">
-        $('.users-home').addClass('active');
+        $('.contents-home').addClass('active');
+        $('.ui.dropdown')
+            .dropdown({
+                allowAdditions: true
+            })
+        ;
     </script>
 @endsection

@@ -23,16 +23,27 @@
         <div class="ui segment">
             <table class="ui fixed table selectable" id="users-table">
                 <thead>
-                <th class="collapsing">Usuario</th>
-                <th>Log</th>
+                <th class="collapsing">id</th>
+                <th class="collapsing">Contenido</th>
                 <th>Descripción</th>
-                <th class="collapsing">Tipo</th>
-                <th class="collapsing">Fecha</th>
+                <th class="">Grado</th>
+                <th class="collapsing">Materia</th>
+                <th class="">Unidad</th>
+                <th class="collapsing">Maestro</th>
+                <th class="collapsing">Archivo</th>
                 </thead>
                 <tbody>
                 @foreach($contents as $key => $content)
                     <tr>
                         <td> {{$key+1}} </td>
+                        <td> {{$content->title}} </td>
+                        <td> {{$content->description}} </td>
+                        <td> {{$content->grade}} </td>
+                        <td> {{$content->course}} </td>
+                        <td> {{$content->unit}} </td>
+                        <td> {{$content->user}} </td>
+                        <td> <a href="{{$content->file_path}}" target="_blank">Archivo</a> </td>
+
                     </tr>
                 @endforeach
                 </tbody>
