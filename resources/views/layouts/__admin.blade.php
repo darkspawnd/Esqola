@@ -51,7 +51,7 @@
             <i class="icon book"></i>
             Notas
         </a>
-        <a class="ui item orange">
+        <a class="ui item orang homeworks-home" href="{!! action('Admin\HomeworksController@index') !!}">
             <i class="icon file"></i>
             Tareas
         </a>

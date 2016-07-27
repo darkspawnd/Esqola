@@ -38,6 +38,6 @@
         </div>
     </div>
     <script type="application/javascript">
-        $('.users-home').addClass('active');
+        $('.events-home').addClass('active');
     </script>
 @endsection

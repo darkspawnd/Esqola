@@ -145,7 +145,32 @@ Breadcrumbs::register('Editar Evento', function($breadcrumbs) {
     $breadcrumbs->push('Editar Evento', action('Admin\EventsController@update'));
 });
 
+// ADMIN GENERAL HOMEWORKS
 
+Breadcrumbs::register('Tareas', function ($breadcrumbs) {
+    $breadcrumbs->parent('Administración');
+    $breadcrumbs->push('Tareas', action('Admin\HomeworksController@index'));
+});
+
+Breadcrumbs::register('Agregar Tarea', function($breadcrumbs) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Agregar Tarea', action('Admin\HomeworksController@add'));
+});
+
+Breadcrumbs::register('Eliminar Tarea', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Eliminar Tarea', action('Admin\HomeworksController@remove', $uuid));
+});
+
+Breadcrumbs::register('Editar Tarea', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Editar Tarea', action('Admin\HomeworksController@edit', $uuid));
+});
+
+Breadcrumbs::register('Editar Tarea', function($breadcrumbs) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Editar Tarea', action('Admin\HomeworksController@update'));
+});
 
 // ADMIN CONTENTS
 

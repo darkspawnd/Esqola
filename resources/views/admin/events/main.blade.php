@@ -67,7 +67,7 @@
         </div>
     </div>
     <script type="application/javascript">
-        $('.users-home').addClass('active');
+        $('.events-home').addClass('active');
         $('.ui.dropdown').dropdown({
             onChange: function (value, text) {
                 if(text === 'Eliminar') {

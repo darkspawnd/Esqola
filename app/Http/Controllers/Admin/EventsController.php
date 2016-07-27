@@ -11,7 +11,7 @@ use Auth;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Spatie\Permission\Models\Permission as Permission;
+use Spatie\Permission\Models\Permission as Permission;  
 use Spatie\Permission\Models\Role as Roles;
 use Validation;
 use Webpatser\Uuid\Uuid as UUID;
