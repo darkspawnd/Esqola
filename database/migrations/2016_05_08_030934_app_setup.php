@@ -73,6 +73,7 @@ class AppSetup extends Migration
 
         Schema::create('contents', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('uuid')->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('grade_id')->unsigned();
             $table->integer('unit_id')->unsigned();

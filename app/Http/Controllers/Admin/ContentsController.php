@@ -54,10 +54,10 @@ class ContentsController extends AdminBaseController
             'min' => 'El campo :attribute debe de cumplir con el número de caracteres.'
         ];
         $this->validate($data, [
-            'title' => 'required',
-            'grade' => 'required',
-            'unit' => 'required',
-            'course' => 'required',
+            'titulo' => 'required',
+            'grado' => 'required',
+            'unidad' => 'required',
+            'materia' => 'required',
         ], $message);
 
         try {
@@ -65,16 +65,17 @@ class ContentsController extends AdminBaseController
             if($data->hasFile('attachment'))
                 $name = FileHelper::upload($data->file('attachment'));
 
-            $course = Courses::where('uuid','=',$data['course'])->get()->first();
-            $grade = Grades::where('uuid','=',$data['grade'])->get()->first();
-            $unit = Units::where('id','=',$data['unit'])->get()->first();
+            $course = Courses::where('uuid','=',$data['materia'])->get()->first();
+            $grade = Grades::where('uuid','=',$data['grado'])->get()->first();
+            $unit = Units::where('id','=',$data['unidad'])->get()->first();
 
             $newcontent = Contents::create([
+                'uuid' => UUID::generate(4),
                 'course_id' => $course->id,
                 'user_id' => $user->id,
                 'grade_id' => $grade->id,
                 'unit_id' => $unit->id,
-                'title' => $data['title'],
+                'title' => $data['titulo'],
                 'description' => $data['description'],
                 'file_path' => $name
             ]);
@@ -102,6 +103,31 @@ class ContentsController extends AdminBaseController
         $courses = Courses::all();
         return view('admin.contents.add',['grades'=>$grades, 'units'=>$units, 'courses'=>$courses]);
 
+    }
+
+    public function remove($uuid) {
+        $requested_user = Auth::user();
+        try{
+            $content = Contents::where('uuid','=',$uuid)->get()->first();
+            if(FileHelper::remove($content->file_path)) {
+                Contents::where('uuid','=',$uuid)->delete();
+            }
+        }Catch(\Exception $e){
+            Error::create([
+                'user_id' => $requested_user->id,
+                'error' => 'Failed to remove content',
+                'description' => $e,
+                'type' => 2,
+            ]);
+        }
+
+        $contents = Contents::all();
+        $contentsFormatted = array();
+
+        foreach ($contents as $cont) {
+            array_push($contentsFormatted, $cont->formatted()[0]);
+        }
+        return view('admin.contents.main', ['contents'=>$contentsFormatted]);
     }
 
 }

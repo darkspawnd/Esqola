@@ -1,7 +1,7 @@
 @extends('layouts/__admin')
 @section('content')
     <div class="ui text menu">
-        <a class="item" href="{!! action('Admin\GradesController@index') !!}">
+        <a class="item" href="{!! action('Admin\ContentsController@index') !!}">
             <button class="ui button basic active"><i class="icon angle left ui"></i>Regresar</button>
         </a>
         <div class="right menu">
@@ -27,7 +27,7 @@
                 {!! csrf_field() !!}
                 <div class="required field">
                     <label class="ui"> Título </label>
-                    <input type="text" name="title" value="{{ old('title') }}">
+                    <input type="text" name="titulo" value="{{ old('title') }}">
                 </div>
                 <div class="field">
                     <label class="ui"> Descripción </label>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="required field">
                     <label class="ui"> Grado </label>
-                    <select name="grade" class="ui search fluid dropdown">
+                    <select name="grado" class="ui search fluid dropdown">
                         <option value=""> Grado </option>
                         @foreach($grades as $grade)
                             <option value="{{{ $grade->uuid }}}"> {{{ $grade->name }}} </option>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="required field">
                     <label class="ui"> Materia </label>
-                    <select name="course" class="ui search fluid dropdown">
+                    <select name="materia" class="ui search fluid dropdown">
                         <option value=""> Materia </option>
                         @foreach($courses as $course)
                             <option value="{{{ $course->uuid }}}"> {{{ $course->name }}} </option>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="required field">
                     <label class="ui"> Unidad </label>
-                    <select name="unit" class="ui search fluid dropdown">
+                    <select name="unidad" class="ui search fluid dropdown">
                         <option value=""> Unidad </option>
                         @foreach($units as $unit)
                             <option value="{{{ $unit->id }}}"> {{{ $unit->common_name }}} </option>

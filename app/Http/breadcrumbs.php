@@ -190,6 +190,11 @@ Breadcrumbs::register('Agregar Contenido', function($breadcrumbs) {
     $breadcrumbs->push('Agregar Contenido', action('Admin\ContentsController@create'));
 });
 
+Breadcrumbs::register('Eliminar Contenido', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Contenidos');
+    $breadcrumbs->push('Eliminar Contenido', action('Admin\ContentsController@remove', $uuid));
+});
+
 // ADMIN LOG
 
 Breadcrumbs::register('Log', function($breadcrumbs) {

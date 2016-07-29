@@ -82,6 +82,7 @@ Route::post('/admin/homeworks/update', ['as'=>'Editar Tarea', 'uses'=>'Admin\Hom
 // ADMINISTRATION > CONTENTS
 Route::get('/admin/contents',['as'=>'Contenidos', 'uses'=>'Admin\ContentsController@index']);
 Route::get('/admin/contents/add',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@add']);
+Route::get('/admin/contents/{uuid}/remove',['as'=>'Eliminar Contenido', 'uses'=>'Admin\ContentsController@remove']);
 
 Route::post('/admin/contents/create',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@create']);
 

@@ -23,7 +23,7 @@
         <div class="ui segment">
             <table class="ui fixed table selectable" id="users-table">
                 <thead>
-                <th class="collapsing">id</th>
+                <th class="collapsing">#</th>
                 <th class="collapsing">Contenido</th>
                 <th>Descripción</th>
                 <th class="">Grado</th>
@@ -31,6 +31,7 @@
                 <th class="">Unidad</th>
                 <th class="collapsing">Maestro</th>
                 <th class="collapsing">Archivo</th>
+                <th class="collapsing">Acciones</th>
                 </thead>
                 <tbody>
                 @foreach($contents as $key => $content)
@@ -43,7 +44,25 @@
                         <td> {{$content->unit}} </td>
                         <td> {{$content->user}} </td>
                         <td> <a href="{{$content->file_path}}" target="_blank">Archivo</a> </td>
-
+                        <td class="collapsing">
+                            <div class="ui floating labeled icon dropdown button">
+                                <i class="wizard icon"></i>
+                                <span class="text">Acciones</span>
+                                <div class="menu">
+                                    <div class="header">
+                                        <i class="list layout icon"></i>
+                                        Opciones
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="item" data-value="{!! action('Admin\UnitController@edit',['id'=>$content->id]) !!}">
+                                        Editar
+                                    </div>
+                                    <div class="item" data-value="{!! action('Admin\ContentsController@remove',['uuid'=>$content->uuid]) !!}">
+                                        Eliminar
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
