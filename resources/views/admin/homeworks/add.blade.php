@@ -50,26 +50,26 @@
     <script type="application/javascript">
         $('.homeworks-home').addClass('active');
         $(document).ready(function(){
-            {{--$('#teacher').change(function(){--}}
-                {{--var teacher, token, url, data;--}}
-                {{--token = $('input[name=_token]').val();--}}
-                {{--teacher = $('#teacher').val();--}}
-                {{--url = '{{route('getadd')}}';--}}
-                {{--data = {teacher: teacher};--}}
-                {{--$('#relaciones').empty();--}}
-                {{--$.ajax({--}}
-                    {{--url: url,--}}
-                    {{--headers: {'X-CSRF-TOKEN': token},--}}
-                    {{--data: data,--}}
-                    {{--type: 'POST',--}}
-                    {{--datatype: 'JSON',--}}
-                    {{--success: function (resp) {--}}
-                        {{--$.each(resp.relaciones, function (key, value) {--}}
-                            {{--$('#relaciones').append('<option>'+ value.nombre_subramo +'</option>');--}}
-                        {{--});--}}
-                    {{--}--}}
-                {{--});--}}
-            {{--});--}}
+            $('#teacher').change(function(){
+                var teacher, token, url, data;
+                token = $('input[name=_token]').val();
+                teacher = $('#teacher').val();
+                url = '{{route('ObtenerTarea')}}';
+                data = {teacher: teacher};
+                $('#relaciones').empty();
+                $.ajax({
+                    url: url,
+                    headers: {'X-CSRF-TOKEN': token},
+                    data: data,
+                    type: 'POST',
+                    datatype: 'JSON',
+                    success: function (resp) {
+                        $.each(resp.relaciones, function (key, value) {
+                            $('#relaciones').append('<option>'+ value.homework +'</option>');
+                        });
+                    }
+                });
+            });
         });
     </script>
 @endsection

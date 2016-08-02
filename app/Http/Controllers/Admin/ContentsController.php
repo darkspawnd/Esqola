@@ -130,4 +130,24 @@ class ContentsController extends AdminBaseController
         return view('admin.contents.main', ['contents'=>$contentsFormatted]);
     }
 
+    public function edit($uuid) {
+        $requested_user = Auth::user();
+        if(Contents::where('uuid','=',$uuid)->exists()) {
+            $updating_content = User::where('uuid','=',$uuid)->get()->first();
+            return View('admin.users.update', ['update_user'=>$updating_content, 'grades'=>$grades, 'grados'=>$grados]);
+        } else {
+            Error::create([
+                'user_id' => $requested_user->id,
+                'error' => 'Failed to edit user, user not found.',
+                'description' => 'User not found',
+                'type' => 2,
+            ]);
+            return redirect()->action('Admin\UsersController@index');
+        }
+    }
+
+    public function update(Request $data) {
+
+    }
+
 }

@@ -92,8 +92,11 @@ class AppSetup extends Migration
 
         Schema::create('events', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('uuid')->nullable();
             $table->string('title',255);
-            $table->string('media');
+            $table->text('description');
+            $table->string('file_path');
+            $table->dateTime('event_date');
             $table->timestamps();
         });
 

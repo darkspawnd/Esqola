@@ -54,7 +54,7 @@
                                         Opciones
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="item" data-value="{!! action('Admin\UnitController@edit',['id'=>$content->id]) !!}">
+                                    <div class="item" data-value="{!! action('Admin\ContentsController@edit',['uuid'=>$content->uuid]) !!}">
                                         Editar
                                     </div>
                                     <div class="item" data-value="{!! action('Admin\ContentsController@remove',['uuid'=>$content->uuid]) !!}">

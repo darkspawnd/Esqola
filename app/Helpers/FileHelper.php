@@ -28,4 +28,11 @@ class FileHelper {
         $filename = $filearr[count($filearr) -  3]. '/' .$filearr[count($filearr) -  2]. '/' .$filearr[count($filearr) -  1];
         return Storage::delete($filename);
     }
+
+    public static function update(UploadFile $newFile, $filepath)
+    {
+        self::remove($filepath);
+        return self::upload($newFile);
+    }
+
 }

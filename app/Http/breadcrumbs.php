@@ -195,6 +195,21 @@ Breadcrumbs::register('Eliminar Contenido', function($breadcrumbs, $uuid) {
     $breadcrumbs->push('Eliminar Contenido', action('Admin\ContentsController@remove', $uuid));
 });
 
+Breadcrumbs::register('Editar Contenido', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Contenidos');
+    $breadcrumbs->push('Editar Contenido', action('Admin\ContentsController@update', $uuid));
+});
+
+Breadcrumbs::register('Editar Contenido', function($breadcrumbs) {
+    $breadcrumbs->parent('Contenidos');
+    $breadcrumbs->push('Editar Contenido', action('Admin\ContentsController@edit', $uuid));
+});
+
+Breadcrumbs::register('Editar Contenido', function($breadcrumbs) {
+    $breadcrumbs->parent('Contenidos');
+    $breadcrumbs->push('Editar Contenido', action('Admin\ContentsController@update'));
+});
+
 // ADMIN LOG
 
 Breadcrumbs::register('Log', function($breadcrumbs) {

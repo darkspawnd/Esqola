@@ -72,7 +72,7 @@ Route::post('/admin/events/update', ['as'=>'Editar Evento', 'uses'=>'Admin\Event
 // ADMINISTRATION > GENERAL > HOMEWORKS
 Route::get('/admin/homeworks',['as'=>'Tareas', 'uses'=>'Admin\HomeworksController@index']);
 Route::get('/admin/homeworks/add',['as'=>'Agregar Tarea', 'uses'=>'Admin\HomeworksController@add']);
-Route::post('/admin/homeworks/getadd',['as'=>'Agregar Tarea', 'uses'=>'Admin\HomeworksController@getAdd']);
+Route::post('/admin/homeworks/getadd',['as'=>'ObtenerTarea', 'uses'=>'Admin\HomeworksController@getAdd']);
 Route::get('/admin/homeworks/remove/{uuid}', ['as'=>'Eliminar Tarea','uses'=>'Admin\HomeworksController@remove']);
 Route::get('/admin/homeworks/update/{uuid}', ['as'=>'Editar Tarea','uses'=>'Admin\HomeworksController@edit']);
 
@@ -82,9 +82,11 @@ Route::post('/admin/homeworks/update', ['as'=>'Editar Tarea', 'uses'=>'Admin\Hom
 // ADMINISTRATION > CONTENTS
 Route::get('/admin/contents',['as'=>'Contenidos', 'uses'=>'Admin\ContentsController@index']);
 Route::get('/admin/contents/add',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@add']);
-Route::get('/admin/contents/{uuid}/remove',['as'=>'Eliminar Contenido', 'uses'=>'Admin\ContentsController@remove']);
+Route::get('/admin/contents/remove/{uuid}',['as'=>'Eliminar Contenido', 'uses'=>'Admin\ContentsController@remove']);
+Route::get('/admin/contents/update/{uuid}',['as'=>'Editar Contenido', 'uses'=>'Admin\ContentsController@edit']);
 
 Route::post('/admin/contents/create',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@create']);
+Route::post('/admin/contents/update',['as'=>'Editar Contenido', 'uses'=>'Admin\ContentsController@update']);
 
 //ADMINISTRATION > LOG
 Route::get('/admin/systemlog', ['as'=>'Log','uses'=>'Admin\SystemController@log']);
