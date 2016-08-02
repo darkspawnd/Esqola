@@ -72,7 +72,7 @@ Route::post('/admin/events/update', ['as'=>'Editar Evento', 'uses'=>'Admin\Event
 // ADMINISTRATION > GENERAL > HOMEWORKS
 Route::get('/admin/homeworks',['as'=>'Tareas', 'uses'=>'Admin\HomeworksController@index']);
 Route::get('/admin/homeworks/add',['as'=>'Agregar Tarea', 'uses'=>'Admin\HomeworksController@add']);
-Route::post('/admin/homeworks/getadd',['as'=>'Agregar Tarea', 'uses'=>'Admin\HomeworksController@getAdd']);
+Route::post('/admin/homeworks/getadd',['as'=>'Obtener Tarea', 'uses'=>'Admin\HomeworksController@getAdd']);
 Route::get('/admin/homeworks/remove/{uuid}', ['as'=>'Eliminar Tarea','uses'=>'Admin\HomeworksController@remove']);
 Route::get('/admin/homeworks/update/{uuid}', ['as'=>'Editar Tarea','uses'=>'Admin\HomeworksController@edit']);
 

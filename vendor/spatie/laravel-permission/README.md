@@ -233,6 +233,12 @@ A permission can be given to a user:
 
 ```php
 $user->givePermissionTo('edit articles');
+
+//you can also give multiple permission at once
+$user->givePermissionTo('edit articles', 'delete articles');
+
+//you may also pass an array
+$user->givePermissionTo(['edit articles', 'delete articles']);
 ```
 
 A permission can be revoked from a user:
@@ -257,6 +263,10 @@ A role can be assigned to a user:
 
 ```php
 $user->assignRole('writer');
+
+// you can also assing multiple roles at once
+$user->assignRole('writer', 'admin');
+$user->assignRole(['writer', 'admin']);
 ```
 
 A role can be removed from a user:
@@ -264,6 +274,14 @@ A role can be removed from a user:
 ```php
 $user->removeRole('writer');
 ```
+
+Roles can also be synced :
+
+```php
+//all current roles will be removed from the user and replace by the array given
+$user->syncRoles(['writer', 'admin']);
+```
+
 You can determine if a user has a certain role:
 
 ```php
@@ -348,6 +366,53 @@ I don't have all of these roles...
 
 You can use Laravel's native `@can` directive to check if a user has a certain permission.
 
+## Using a middleware
+The package doesn't contain a middleware to check permissions but it's very trivial to add this yourself.
+
+``` bash
+$ php artisan make:middleware RoleMiddleware
+```
+
+This will create a RoleMiddleware for you and here you can handle your role and permissions check.
+```php
+// app/Http/Middleware/RoleMiddleware.php
+public function handle($request, Closure $next, $role, $permission)
+{
+    if (Auth::guest()) {
+        return redirect($urlOfYourLoginPage);
+    }
+
+    if (! $request->user()->hasRole($role)) {
+       abort(403);
+    }
+    
+    if (! $request->user()->can($permission)) {
+       abort(403);
+    }
+
+    return $next($request);
+}
+```
+
+Don't forget to add the route middleware to your Kernel:
+
+```php
+// app/Http/Kernel.php
+protected $routeMiddleware = [
+    ...
+    'role' => \App\Http\Middleware\RoleMiddleware::class,
+    ...
+];
+```
+
+Now you can protect your routes using the middleware you just set up:
+
+```php
+Route::group(['middleware' => ['role:admin,access_backend']], function () {
+    //
+});
+```
+
 ## Extending
 
 If you need to extend or replace the existing `Role` or `Permission` models you just need to 
@@ -389,6 +454,7 @@ can be found [in this repo on GitHub](https://github.com/laracasts/laravel-5-rol
 - [BeatSwitch/lock-laravel](https://github.com/BeatSwitch/lock-laravel)
 - [Zizaco/entrust](https://github.com/Zizaco/entrust)
 - [JosephSilber/bouncer](https://github.com/JosephSilber/bouncer)
+- [bican/roles](https://github.com/romanbican/roles)
 
 ## About Spatie
 Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
