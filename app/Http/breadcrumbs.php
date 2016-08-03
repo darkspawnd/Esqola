@@ -157,6 +157,10 @@ Breadcrumbs::register('Agregar Tarea', function($breadcrumbs) {
     $breadcrumbs->parent('Tareas');
     $breadcrumbs->push('Agregar Tarea', action('Admin\HomeworksController@add'));
 });
+Breadcrumbs::register('Obtener Tarea', function($breadcrumbs) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Obtener Tarea', action('Admin\HomeworksController@getAdd'));
+});
 
 Breadcrumbs::register('Eliminar Tarea', function($breadcrumbs, $uuid) {
     $breadcrumbs->parent('Tareas');
@@ -200,7 +204,7 @@ Breadcrumbs::register('Editar Contenido', function($breadcrumbs, $uuid) {
     $breadcrumbs->push('Editar Contenido', action('Admin\ContentsController@update', $uuid));
 });
 
-Breadcrumbs::register('Editar Contenido', function($breadcrumbs) {
+Breadcrumbs::register('Editar Contenido', function($breadcrumbs,$uuid) {
     $breadcrumbs->parent('Contenidos');
     $breadcrumbs->push('Editar Contenido', action('Admin\ContentsController@edit', $uuid));
 });

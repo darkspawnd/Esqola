@@ -23,15 +23,16 @@
                     <li>{{ $status->message }}</li>
                 </div>
             @endif
-            <form method="post" class="ui form error" role="form" action="{!! action('Admin\ContentsController@create') !!}" enctype="multipart/form-data">
+            <form method="post" class="ui form error" role="form" action="{!! action('Admin\ContentsController@update') !!}" enctype="multipart/form-data">
                 {!! csrf_field() !!}
+                {{ Form::hidden('auth', $update_content->uuid) }}
                 <div class="required field">
                     <label class="ui"> Título </label>
-                    <input type="text" name="titulo" value="{{ old('title') }}">
+                    <input type="text" name="titulo" value="{{{ $update_content->title }}}">
                 </div>
                 <div class="field">
                     <label class="ui"> Descripción </label>
-                    <input type="text" name="description" value="{{ old('description') }}">
+                    <input type="text" name="description" value="{{{ $update_content->description  }}}">
                 </div>
                 <div class="required field">
                     <label class="ui"> Grado </label>
@@ -66,7 +67,7 @@
                 </div>
                 <div class="field align-to-right">
                     <button class="ui button orange active submit">
-                        <i class="icon add"></i>Añadir
+                        <i class="icon add"></i>Actualizar
                     </button>
                 </div>
             </form>
