@@ -1,8 +1,8 @@
-@extends('layouts.__admin')
+@extends('layouts/__admin')
 @section('content')
     <div class="ui text menu">
         <a class="item" href="{!! action('Admin\HomeworksController@index') !!}">
-            <button class="ui button basic active"><i class="icon angle left ui"></i> Regresar</button>
+            <button class="ui button basic active"><i class="icon angle left ui"></i>Regresar</button>
         </a>
         <div class="right menu">
             <div class="item">
@@ -23,21 +23,46 @@
                     <li>{{ $status->message }}</li>
                 </div>
             @endif
-            <form method="post" class="ui form error" role="form" action="{!! action('Admin\HomeworksController@create') !!}">
-                    {!! csrf_field() !!}
+            <form method="post" class="ui form error" role="form" action="{!! action('Admin\HomeworksController@create') !!}" enctype="multipart/form-data">
+                {!! csrf_field() !!}
+                <div class="required field">
+                    <label class="ui"> Título </label>
+                    <input type="text" name="titulo" value="{{ old('title') }}">
+                </div>
                 <div class="field">
-                    <label>Maestro</label>
-                    <select id="teacher" class="ui dropdown normal" name="teacher">
-                        @foreach($teachers as $teacher)
-                            @foreach($teacher as $name)
-                            <option class="ui" value="{{{$name->id}}}">{{{$name->name}}}</option>
-                            @endforeach
+                    <label class="ui"> Descripción </label>
+                    <input type="text" name="description" value="{{ old('description') }}">
+                </div>
+                <div class="required field">
+                    <label class="ui"> Grado </label>
+                    <select name="grado" class="ui search fluid dropdown">
+                        <option value=""> Grado </option>
+                        @foreach($grades as $grade)
+                            <option value="{{{ $grade->uuid }}}"> {{{ $grade->name }}} </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="required field">
-                    <label class="ui"> Tarea </label>
-                    <input type="text" name="homework" value="{{ old('homework') }}">
+                    <label class="ui"> Materia </label>
+                    <select name="materia" class="ui search fluid dropdown">
+                        <option value=""> Materia </option>
+                        @foreach($courses as $course)
+                            <option value="{{{ $course->uuid }}}"> {{{ $course->name }}} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="required field">
+                    <label class="ui"> Unidad </label>
+                    <select name="unidad" class="ui search fluid dropdown">
+                        <option value=""> Unidad </option>
+                        @foreach($units as $unit)
+                            <option value="{{{ $unit->id }}}"> {{{ $unit->common_name }}} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="ui"> Archivo </label>
+                    <input type="file" name="attachment" value="{{ old('file') }}">
                 </div>
                 <div class="field align-to-right">
                     <button class="ui button orange active submit">
@@ -48,28 +73,11 @@
         </div>
     </div>
     <script type="application/javascript">
-        $('.homeworks-home').addClass('active');
-        $(document).ready(function(){
-            $('#teacher').change(function(){
-                var teacher, token, url, data;
-                token = $('input[name=_token]').val();
-                teacher = $('#teacher').val();
-                url = '{{route('ObtenerTarea')}}';
-                data = {teacher: teacher};
-                $('#relaciones').empty();
-                $.ajax({
-                    url: url,
-                    headers: {'X-CSRF-TOKEN': token},
-                    data: data,
-                    type: 'POST',
-                    datatype: 'JSON',
-                    success: function (resp) {
-                        $.each(resp.relaciones, function (key, value) {
-                            $('#relaciones').append('<option>'+ value.homework +'</option>');
-                        });
-                    }
-                });
-            });
-        });
+        $('.contents-home').addClass('active');
+        $('.ui.dropdown')
+                .dropdown({
+                    allowAdditions: true
+                })
+        ;
     </script>
 @endsection
