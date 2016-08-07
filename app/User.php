@@ -67,7 +67,6 @@ class User extends Authenticatable
                                 WHERE users.id = :id)
                                 GROUP BY rltn_grade_course.course_id', ['id'=>$this->id]);
         return $courses;
-        
     }
 
 }

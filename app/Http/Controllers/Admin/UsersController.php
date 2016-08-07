@@ -15,6 +15,7 @@ use Spatie\Permission\Models\Permission as Permission;
 use Spatie\Permission\Models\Role as Roles;
 use Validation;
 use Webpatser\Uuid\Uuid as UUID;
+use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class UsersController extends AdminBaseController
 {
@@ -269,6 +270,51 @@ class UsersController extends AdminBaseController
         $grades = Grade::all();
         $grados = Grade::all();
         return view('admin.users.user-grades',['user', 'grades'=>$grades, 'grados'=>$grados]);
+    }
+
+    public function exportExcel() {
+        $current_user = Auth::user();
+        try {
+            Excel::create('Listado de Usuarios Esqola', function ($excel) {
+
+                $excel->sheet('Usuarios - Eqola', function ($sheet) {
+
+                    $sheet->setOrientation('landscape');
+
+                    $sheet->row(1, array(
+                        'Código', 'Nombre', 'Apellido', 'Email', 'Telëfono', 'Dirección', 'Edad', 'Contraseña', 'Grado', 'Encargado', 'Info Encargado'
+                    ));
+
+                    $users = User::all();
+
+                    $current_export = 2;
+                    foreach ($users as $user ) {
+                        if($user->hasRole('Estudiante')){
+                            $sheet->row($current_export, array(
+                                $user->BK, $user->name, $user->lastname, $user->email, $user->telephone, $user->address, $user->age, $user->password, 'Grado', $user->attribute->incharge, $user->attribute->incharge_info
+                            ));
+                            $current_export++;
+                        }
+                    }
+
+                    $sheet->setAutoFilter();
+                    $sheet->setAutoSize(true);
+                });
+
+            })->export('xls');
+        } catch (\Exception $e) {
+            Error::create([
+                'user_id' => $current_user->id,
+                'error' => 'Failed to export user excel',
+                'description' => $e,
+                'type' => 2,
+            ]);
+        }
+    }
+
+    public function importExcel(Request $data) {
+        $hello = ($data->hasFile('exceldocument')) ? 1 : 0;
+        return $data->File('exceldocument');
     }
 
 }

@@ -162,6 +162,7 @@ return [
         App\Providers\HelperServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*

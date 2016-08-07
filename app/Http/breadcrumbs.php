@@ -225,3 +225,9 @@ Breadcrumbs::register('Descripción', function($breadcrumbs,$id) {
     $breadcrumbs->parent('Log');
     $breadcrumbs->push('Descripción', action('Admin\SystemController@LogDescription',$id));
 });
+
+
+// DEFAULT
+Breadcrumbs::register('Default', function($breadcrumbs) {
+    $breadcrumbs->push('Default');
+});

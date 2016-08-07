@@ -20,14 +20,24 @@
         </div>
     </div>
     <div class="ui segments ">
-        <div class="ui menu attached right icon labeled aligned">
+        <div class="ui menu attached icon labeled aligned">
             <div class="ui header item borderless">
                 Usuarios
             </div>
-            <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\UsersController@addUser') !!}">
-                <i class="icon add"></i>
-                Agregar
-            </a>
+            <div class="right icon menu">
+                <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\UsersController@addUser') !!}">
+                    <i class="icon add"></i>
+                    Agregar
+                </a>
+                <div class="ui dropdown icon item" id="exceloptions">
+                    <i class="icon teal  file excel outline"></i>
+                    Excel
+                    <div class="ui dropdown menu">
+                        <a class="item" data-value="{!! action('Admin\UsersController@exportExcel') !!}">Exportar</a>
+                        <a class="item" data-value="{!! action('Admin\UsersController@importExcel') !!}">Importar</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="ui segment">
             <table class="ui fixed table selectable" id="users-table">
@@ -47,7 +57,7 @@
                             <td> {{{ $current_user->email }}} </td>
                             <td> {{{ $current_user->roles()->pluck('name') }}} </td>
                             <td>
-                                <div class="ui floating labeled icon dropdown button">
+                                <div class="ui floating labeled icon dropdown button" id="yesnodelete">
                                     <i class="wizard icon"></i>
                                     <span class="text">Acciones</span>
                                     <div class="menu">
@@ -96,19 +106,32 @@
         </div>
     </div>
 
-    <div class="ui modal small">
+    <div class="ui modal small" id="yesnodeletemodal">
         <div class="header">¿Desea continuar?</div>
         <div class="actions">
             <div class="ui cancel onDeny button">Cancelar</div>
             <div class="ui approve red button">Eliminar</div>
         </div>
     </div>
+    <div class="ui modal small" id="importexcelmodal">
+        <div class="header">Carga de Excel</div>
+        <div class="content">
+            <form method="post" id="excelsubmission">
+                {!! csrf_field() !!}
+                <input type="file" name='exceldocument' id="exceldocument" accept="application/vnd.ms-excel"/>
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui cancel onDeny button">Cancelar</div>
+            <div class="ui approve green button">Eliminar</div>
+        </div>
+    </div>
     <script type="application/javascript">
         $('.users-home').addClass('active');
-        $('.ui.dropdown').dropdown({
+        $('.ui.dropdown#yesnodelete').dropdown({
             onChange: function (value, text) {
                 if(text === 'Eliminar') {
-                    $('.ui.modal').modal('setting', {
+                    $('#yesnodeletemodal').modal('setting', {
                         closable: false,
                         onApprove: function () {
                             window.location = value;
@@ -116,6 +139,32 @@
                     }).modal('show');
                 }else {
                     window.location.href = value;
+                }
+            }
+        });
+        $('.ui.dropdown#exceloptions').dropdown({
+            onChange: function (value, text) {
+                if(text === 'Importar') {
+                    $('#importexcelmodal').modal('setting', {
+                        closable: false,
+                        onApprove: function () {
+                            var formdata = new FormData($('#excelsubmission')[0]);
+                            $.ajax({
+                                url: value,
+                                type: 'post',
+                                data: formdata,
+                                success: function (data) {
+                                    console.log(data);
+                                },
+                                cache: false,
+                                contentType: false,
+                                processData: false
+                            });
+                            return false;
+                        }
+                    }).modal('show');
+                }else if('Exportar'){
+                    window.open(value);
                 }
             }
         });

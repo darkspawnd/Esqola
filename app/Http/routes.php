@@ -27,9 +27,11 @@ Route::get('/admin/users', ['as'=>'Usuarios','uses'=>'Admin\UsersController@inde
 Route::get('/admin/users/add', ['as'=>'Agregar','uses'=>'Admin\UsersController@addUser']);
 Route::get('/admin/users/update/{uuid}',['as'=>'Editar Usuarios','uses'=>'Admin\UsersController@editUser']);
 Route::get('/admin/users/remove/{uuid}', ['as'=>'Eliminar','uses'=>'Admin\UsersController@removeUser']);
+Route::get('/admin/users/excel/export', ['as'=>'Default','uses'=>'Admin\UsersController@exportExcel']);
 
 Route::post('/admin/users/add', ['as'=>'Agregar', 'uses'=>'Admin\UsersController@createUser']);
 Route::post('/admin/users/update/',['as'=>'Editar Usuarios','uses'=>'Admin\UsersController@updateUser']);
+Route::post('/admin/users/excel/import',['as'=>'Default','uses'=>'Admin\UsersController@importExcel']);
 
 //ADMINISTRATION > GENERAL > GRADES
 Route::get('/admin/grades', ['as'=>'Grados','uses'=>'Admin\GradesController@index']);
