@@ -541,16 +541,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.25",
+            "version": "1.0.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a76afa4035931be0c78ca8efc6abf3902362f437"
+                "reference": "fb3b30dca320b36931ea878fea17ebe136fba1b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a76afa4035931be0c78ca8efc6abf3902362f437",
-                "reference": "a76afa4035931be0c78ca8efc6abf3902362f437",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/fb3b30dca320b36931ea878fea17ebe136fba1b0",
+                "reference": "fb3b30dca320b36931ea878fea17ebe136fba1b0",
                 "shasum": ""
             },
             "require": {
@@ -620,7 +620,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-07-18 12:22:57"
+            "time": "2016-08-03 09:49:11"
         },
         {
             "name": "maatwebsite/excel",
@@ -628,19 +628,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "42ca2b699241376f0891c1cbb90f1e5363355a85"
+                "reference": "17e9bd7acf5dad119a4f891928b626d02227c165"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/42ca2b699241376f0891c1cbb90f1e5363355a85",
-                "reference": "42ca2b699241376f0891c1cbb90f1e5363355a85",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/17e9bd7acf5dad119a4f891928b626d02227c165",
+                "reference": "17e9bd7acf5dad119a4f891928b626d02227c165",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "5.0.*|5.1.*|5.2.*",
-                "illuminate/config": "5.0.*|5.1.*|5.2.*",
-                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*",
-                "illuminate/support": "5.0.*|5.1.*|5.2.*",
+                "illuminate/cache": "5.0.*|5.1.*|5.2.*|5.3.*",
+                "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*",
+                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*",
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*",
                 "nesbot/carbon": "~1.0",
                 "php": ">=5.5",
                 "phpoffice/phpexcel": "1.8.*",
@@ -653,10 +653,10 @@
                 "phpunit/phpunit": "~4.0"
             },
             "suggest": {
-                "illuminate/http": "5.0.*|5.1.*|5.2.*",
-                "illuminate/queue": "5.0.*|5.1.*|5.2.*",
-                "illuminate/routing": "5.0.*|5.1.*|5.2.*",
-                "illuminate/view": "5.0.*|5.1.*|5.2.*"
+                "illuminate/http": "5.0.*|5.1.*|5.2.*|5.3.*",
+                "illuminate/queue": "5.0.*|5.1.*|5.2.*|5.3.*",
+                "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*",
+                "illuminate/view": "5.0.*|5.1.*|5.2.*|5.3.*"
             },
             "type": "library",
             "autoload": {
@@ -687,7 +687,7 @@
                 "import",
                 "laravel"
             ],
-            "time": "2016-07-27 17:05:52"
+            "time": "2016-08-02 22:06:21"
         },
         {
             "name": "monolog/monolog",

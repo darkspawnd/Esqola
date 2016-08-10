@@ -214,6 +214,37 @@ Breadcrumbs::register('Editar Contenido', function($breadcrumbs) {
     $breadcrumbs->push('Editar Contenido', action('Admin\ContentsController@update'));
 });
 
+// ADMIN GENERAL SCORES
+
+Breadcrumbs::register('Notas', function ($breadcrumbs) {
+    $breadcrumbs->parent('Administración');
+    $breadcrumbs->push('Notas', action('Admin\ScoresController@index'));
+});
+
+Breadcrumbs::register('Agregar Notas', function($breadcrumbs) {
+    $breadcrumbs->parent('Notas');
+    $breadcrumbs->push('Agregar Notas', action('Admin\ScoresController@add'));
+});
+Breadcrumbs::register('Obtener Notas', function($breadcrumbs) {
+    $breadcrumbs->parent('Notas');
+    $breadcrumbs->push('Obtener Notas', action('Admin\ScoresController@getAdd'));
+});
+
+Breadcrumbs::register('Eliminar Notas', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Tareas');
+    $breadcrumbs->push('Eliminar Notas', action('Admin\ScoresController@remove', $uuid));
+});
+
+Breadcrumbs::register('Editar Notas', function($breadcrumbs, $uuid) {
+    $breadcrumbs->parent('Notas');
+    $breadcrumbs->push('Editar Notas', action('Admin\ScoresController@edit', $uuid));
+});
+
+Breadcrumbs::register('Editar Notas', function($breadcrumbs) {
+    $breadcrumbs->parent('Notas');
+    $breadcrumbs->push('Editar Notas', action('Admin\ScoresController@update'));
+});
+
 // ADMIN LOG
 
 Breadcrumbs::register('Log', function($breadcrumbs) {
