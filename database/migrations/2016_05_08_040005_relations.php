@@ -47,6 +47,7 @@ class Relations extends Migration
 
         Schema::table('score', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('published_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('course_id')->references('id')->on('grades')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreign('homework_id')->references('id')->on('units')->onDelete('cascade');
@@ -100,6 +101,7 @@ class Relations extends Migration
 
         Schema::table('score', function(Blueprint $table) {
             $table->dropForeign('score_user_id_foreign');
+            $table->dropForeign('score_published_by_foreign');
             $table->dropForeign('score_course_id_foreign');
             $table->dropForeign('score_unit_id_foreign');
             $table->dropForeign('score_homework_id_foreign');

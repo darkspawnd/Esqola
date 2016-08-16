@@ -15,8 +15,8 @@
     {!! Html::style('css/custom.css') !!}
     {!! Html::script('scripts/app.js') !!}
 
-    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js" type="application/javascript"></script>
-    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.semanticui.min.js" type="application/javascript"></script>
+    {!! Html::script('scripts/datatables.js') !!}
+    {!! Html::script('scripts/datatables-semanticui.js') !!}
 
     <title>Esqola | Administration</title>
 
@@ -47,7 +47,7 @@
             <i class="icon university"></i>
             General
         </a>
-        <a class="ui item orange">
+        <a class="ui item orange scores-home" href="{!! action('Admin\ScoresController@index') !!}">
             <i class="icon book"></i>
             Notas
         </a>

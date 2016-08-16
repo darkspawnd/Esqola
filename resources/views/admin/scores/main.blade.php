@@ -15,7 +15,7 @@
             <div class="ui header item borderless">
                 Tareas
             </div>
-            <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\HomeworksController@add') !!}">
+            <a class="ui icon labeled item right aligned primary" href="{!! action('Admin\ScoresController@add') !!}">
                 <i class="icon add"></i>
                 Agregar
             </a>
@@ -28,10 +28,10 @@
                 <th class="collapsing">Acciones</th>
                 </thead>
                 <tbody>
-                @foreach($homeworks as $key => $homework_current)
+                @foreach($scores as $key => $score)
                     <tr>
                         <td> {{{ $key+1 }}} </td>
-                        <td> {{{ $homework_current->title }}} </td>
+                        <td> {{{ $score->title }}} </td>
                         <td class="collapsing">
                             <div class="ui floating labeled icon dropdown button">
                                 <i class="wizard icon"></i>
@@ -67,7 +67,7 @@
         </div>
     </div>
     <script type="application/javascript">
-        $('.homeworks-home').addClass('active');
+        $('.scores-home').addClass('active');
         $('.ui.dropdown').dropdown({
             onChange: function (value, text) {
                 if(text === 'Eliminar') {

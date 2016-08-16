@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use DB;
+use App\Grades;
 
 class User extends Authenticatable
 {
@@ -31,7 +32,7 @@ class User extends Authenticatable
         return $this->hasOne('App\User_attribute');
     }
     public function usgra(){
-        return $this->belongsToMany('App\user_grade', 'rltn_user_grade','user_id', 'grade_id');
+        return $this->belongsToMany('App\Grades', 'rltn_user_grade','user_id', 'grade_id');
     }
     public function settings() {
         return $this->hasOne('App\User_settings');

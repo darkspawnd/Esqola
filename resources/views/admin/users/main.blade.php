@@ -123,7 +123,7 @@
         </div>
         <div class="actions">
             <div class="ui cancel onDeny button">Cancelar</div>
-            <div class="ui approve green button">Eliminar</div>
+            <div class="ui approve green button">Añadir</div>
         </div>
     </div>
     <script type="application/javascript">

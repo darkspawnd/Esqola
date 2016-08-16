@@ -101,6 +101,12 @@ Route::get('/admin/contents/update/{uuid}',['as'=>'Editar Contenido', 'uses'=>'A
 Route::post('/admin/contents/create',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@create']);
 Route::post('/admin/contents/update',['as'=>'Editar Contenido', 'uses'=>'Admin\ContentsController@update']);
 
+// ADMINISTRATION > SCORES
+Route::get('/admin/scores',['as'=>'Notas', 'uses'=>'Admin\ScoresController@index']);
+Route::get('/admin/scores/add',['as'=>'Agregar Notas', 'uses'=>'Admin\ScoresController@add']);
+
+Route::post('/admin/scores/getStudents',['as'=>'Consultar Alumnos', 'uses'=>'Admin\ScoresController@getStudents']);
+
 //ADMINISTRATION > LOG
 Route::get('/admin/systemlog', ['as'=>'Log','uses'=>'Admin\SystemController@log']);
 Route::get('/admin/systemlog/{id}', ['as'=>'Descripción','uses'=>'Admin\SystemController@LogDescription']);

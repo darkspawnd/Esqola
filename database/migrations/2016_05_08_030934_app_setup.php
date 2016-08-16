@@ -55,6 +55,7 @@ class AppSetup extends Migration
         Schema::create('score', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('published_by')->unsigned();
             $table->integer('course_id')->unsigned();
             $table->integer('unit_id')->unsigned();
             $table->integer('homework_id')->unsigned();
