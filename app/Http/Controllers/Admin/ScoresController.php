@@ -39,7 +39,7 @@ class ScoresController extends AdminBaseController implements FormTemplate
     public function getStudents(Request $data) {
         $grade_uuid = $data['grade'];
         $grade = Grades::where('uuid',$grade_uuid)->get()->first();
-        $students = $this->sanitizeStudents($grade->gruser);
+        $students = $this->sanitizeStudents($grade->usersSorted);
         return json_encode($students);
     }
 
@@ -68,7 +68,7 @@ class ScoresController extends AdminBaseController implements FormTemplate
             if($student->hasRole('Estudiante')) {
                 array_push($sanitizedStudents,array (
                     'uuid' => $student->uuid,
-                    'name' => $student->full_name(),
+                    'name' => $student->full_listed_name(),
                 ));
             }
         }

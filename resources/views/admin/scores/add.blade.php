@@ -117,8 +117,8 @@
         ;
         function getStudents() {
             $.ajax({
-                URL: '{!! action('Admin\ScoresController@getStudents') !!}',
-                method: 'post',
+                url: '{!! action("Admin\ScoresController@getStudents") !!}',
+                type: 'post',
                 datatype: 'json',
                 data: {
                     '_token': '{{ csrf_token() }}',

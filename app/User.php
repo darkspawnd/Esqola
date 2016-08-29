@@ -51,6 +51,10 @@ class User extends Authenticatable
         return $this->name . ' ' . $this->lastname;
     }
 
+    public function full_listed_name() {
+        return $this->lastname . ' ' . $this->name;
+    }
+
     public function error() {
         return $this->hasOne('App\errors');
     }

@@ -225,9 +225,10 @@ Breadcrumbs::register('Agregar Notas', function($breadcrumbs) {
     $breadcrumbs->parent('Notas');
     $breadcrumbs->push('Agregar Notas', action('Admin\ScoresController@add'));
 });
-Breadcrumbs::register('Obtener Notas', function($breadcrumbs) {
+
+Breadcrumbs::register('Consultar Alumnos', function($breadcrumbs) {
     $breadcrumbs->parent('Notas');
-    $breadcrumbs->push('Obtener Notas', action('Admin\ScoresController@getStudents'));
+    $breadcrumbs->push('Consultar Alumnos', action('Admin\ScoresController@getStudents'));
 });
 
 Breadcrumbs::register('Eliminar Notas', function($breadcrumbs, $uuid) {
