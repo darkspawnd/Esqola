@@ -18,7 +18,7 @@
     {!! Html::script('scripts/datatables.js') !!}
     {!! Html::script('scripts/datatables-semanticui.js') !!}
 
-    <title>Esqola | Administration</title>
+    <title>Esqola | Administración</title>
 
 </head>
 <body id="app-layout">

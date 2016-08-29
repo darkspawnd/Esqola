@@ -152,6 +152,8 @@
                         var inputCell = document.createElement('td');
 
                         nameCell.innerHTML = students[i].name;
+                        inputCell.innerHTML = '<input type="hidden" value="'+ students[i].uuid +'" name=" form['+i+'][] "/>';
+                        inputCell.innerHTML += '<input type="number"  name=" form['+i+'][] " min="1" max="100"/>';
 
                         $(row).append(nameCell);
                         $(row).append(inputCell);

@@ -15,6 +15,7 @@
  * PUBLIC APP
  */
 
+#region Administration
 Route::auth();
 Route::get('/', ['as'=>'Inicio','uses'=>'HomeController@index']);
 Route::get('logout','HomeController@logout');
@@ -81,17 +82,6 @@ Route::get('/admin/homeworks/update/{uuid}', ['as'=>'Editar Tarea','uses'=>'Admi
 Route::post('/admin/homeworks/add', ['as'=>'Agregar Tarea', 'uses'=>'Admin\HomeworksController@create']);
 Route::post('/admin/homeworks/update', ['as'=>'Editar Tarea', 'uses'=>'Admin\HomeworksController@update']);
 
-
-// ADMINISTRATION > GENERAL > SCORES
-Route::get('/admin/scores',['as'=>'Notas', 'uses'=>'Admin\ScoresController@index']);
-Route::get('/admin/scores/add',['as'=>'Agregar Notas', 'uses'=>'Admin\ScoresController@add']);
-Route::post('/admin/scores/getadd',['as'=>'Obtener Notas', 'uses'=>'Admin\ScoresController@getAdd']);
-Route::get('/admin/scores/remove/{uuid}', ['as'=>'Eliminar Notas','uses'=>'Admin\ScoresController@remove']);
-Route::get('/admin/scores/update/{uuid}', ['as'=>'Editar Notas','uses'=>'Admin\ScoresController@edit']);
-
-Route::post('/admin/scores/add', ['as'=>'Agregar Notas', 'uses'=>'Admin\ScoresController@create']);
-Route::post('/admin/scores/update', ['as'=>'Editar Notas', 'uses'=>'Admin\ScoresController@update']);
-
 // ADMINISTRATION > CONTENTS
 Route::get('/admin/contents',['as'=>'Contenidos', 'uses'=>'Admin\ContentsController@index']);
 Route::get('/admin/contents/add',['as'=>'Agregar Contenido', 'uses'=>'Admin\ContentsController@add']);
@@ -106,7 +96,18 @@ Route::get('/admin/scores',['as'=>'Notas', 'uses'=>'Admin\ScoresController@index
 Route::get('/admin/scores/add',['as'=>'Agregar Notas', 'uses'=>'Admin\ScoresController@add']);
 
 Route::post('/admin/scores/getStudents',['as'=>'Consultar Alumnos', 'uses'=>'Admin\ScoresController@getStudents']);
+Route::post('/admin/scores/create', ['as'=>'Agregar Notas', 'uses'=>'Admin\ScoresController@create']);
 
 //ADMINISTRATION > LOG
 Route::get('/admin/systemlog', ['as'=>'Log','uses'=>'Admin\SystemController@log']);
 Route::get('/admin/systemlog/{id}', ['as'=>'Descripción','uses'=>'Admin\SystemController@LogDescription']);
+#endregion
+
+#region User
+#endregion
+
+#region Teachers
+#endregion
+
+#region Web Restful API
+#endregion

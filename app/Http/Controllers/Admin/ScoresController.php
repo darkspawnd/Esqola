@@ -37,14 +37,13 @@ class ScoresController extends AdminBaseController implements FormTemplate
     }
 
     public function getStudents(Request $data) {
-
-    }
-
-    public function create(Request $data) {
         $grade_uuid = $data['grade'];
         $grade = Grades::where('uuid',$grade_uuid)->get()->first();
         $students = $this->sanitizeStudents($grade->gruser);
         return json_encode($students);
+    }
+
+    public function create(Request $data) {
     }
 
     public function edit()
